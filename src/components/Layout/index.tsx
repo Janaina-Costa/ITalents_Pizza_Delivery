@@ -1,24 +1,42 @@
 import { Outlet } from 'react-router-dom';
 
-import logo from '../../assets/logo.png';
+import { Button } from '../Button';
+import { Logo } from '../Logo';
 
 const Layout = () => (
   <>
-    <header className="z-50 w-full">
-      <nav className="flex items-center max-w-7xl mx-auto px-6 py-3  bg-red-400">
+    <header className="z-50 w-full relative">
+      <nav className="flex items-center max-w-7xl mx-auto px-6 py-3">
         <div className="flex flex-grow items-center ">
-          <img src={logo} alt="logo" className="w-28 cursor-pointer" />
-          <p className="text-center text-3xl font-semibold text-gray-700">
-            <span className="text-[#00913]">D</span>elizi
-            <span className="text-[#c1001c]">a</span>
-          </p>
+          <div className="flex flex-col relative">
+            <Logo />
+          </div>
         </div>
         <ul className="flex items-center justify-end space-x-6">
-          <li>Home</li>
-          <li>Cardápio</li>
-          <li>Sacola</li>
-          <li>Login</li>
-          <li>Cadastre-se</li>
+          <li className="cursor-pointer hover:text-primary-red-0 ease-in-out duration-300">
+            Home
+          </li>
+          <li className="cursor-pointer  hover:text-primary-red-0 ease-in-out duration-300">
+            Cardápio
+          </li>
+          <li className="cursor-pointer  hover:text-primary-red-0 ease-in-out duration-300">
+            Sacola
+          </li>
+          <li className="cursor-pointer  hover:text-primary-red-0 ease-in-out duration-300">
+            Login
+          </li>
+          <li className="cursor-pointer  hover:text-primary-red-0 ease-in-out duration-300">
+            <Button
+              className="btn  hover:brightness-200
+              ease-in-out
+              duration-300
+              rounded-full
+              text-white"
+              type="button"
+            >
+              Cadastre-se
+            </Button>
+          </li>
         </ul>
       </nav>
     </header>
