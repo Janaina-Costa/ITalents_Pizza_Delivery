@@ -5,14 +5,14 @@ import { Logo } from '../Logo';
 
 const Layout = () => (
   <>
-    <header className="z-50 w-full relative">
-      <nav className="flex items-center max-w-7xl mx-auto px-6 py-3">
+    <header className="z-50 w-full ">
+      <nav className="flex items-center max-w-7xl mx-auto px-6 py-3 bg-layout">
         <div className="flex flex-grow items-center ">
           <div className="flex flex-col relative">
             <Logo />
           </div>
         </div>
-        <ul className="flex items-center justify-end space-x-6">
+        <ul className="flex items-center justify-end space-x-6 text-gray-200">
           <li className="cursor-pointer hover:text-primary-red-0 ease-in-out duration-300">
             Home
           </li>

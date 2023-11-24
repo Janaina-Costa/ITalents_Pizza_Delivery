@@ -11,7 +11,16 @@ export const Button = ({
   className,
   type = 'button',
 }: IProps) => (
-  <button className={className} onClick={onClick} type={type}>
+  <button
+    className={`${className},
+    hover:brightness-200
+    ease-in-out
+    duration-300
+    rounded-full
+    text-white"`}
+    onClick={onClick}
+    type={type}
+  >
     {children}
   </button>
 );

@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+
 export default {
   content: [
     "./index.html",
@@ -21,7 +22,7 @@ export default {
         'primary-green-4': '#0F2900'
       },
       backgroundImage: {
-        'gradient-linear-red':'linear-gradient(90deg, rgba(255,0,0,1) 0%, rgba(182,12,12,1) 49%, rgba(92,6,6,1) 100%);'
+        'back-banner':'url("./src/assets/backbanner.png")'
       }
     },
   },

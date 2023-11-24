@@ -12,7 +12,22 @@ body{
 }
 
 .btn{
-  padding: 1rem 2rem;
+  padding: .875rem 2rem;
   background: linear-gradient(90deg, rgba(255,0,0,1) 0%, rgba(182,12,12,1) 49%, rgba(92,6,6,1) 100%);
-  
+
+}
+
+.bg-layout{
+  background: linear-gradient(180deg, #505050 0%, rgba(31,30,30,1) 49%, rgba(0,0,0,1) 100%);
+}
+
+.swiperSlide{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  color: #ffffff;
+  border-radius: 8px;
 }
