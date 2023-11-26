@@ -1,13 +1,13 @@
 import { useState } from 'react';
 
 import promoData from '../../data/promoData';
-import { IPropsPromotion } from '../../types/interface/promotions';
+import { IPropsItems } from '../../types/interface/promotions';
 
 import { ActiveSlides } from './ActiveSliders';
 import { PromoItem } from './PromotionItems';
 
 export const Banner = () => {
-  const [itemPromo, setItemPromo] = useState<IPropsPromotion[]>(promoData);
+  const [itemPromo, setItemPromo] = useState<IPropsItems[]>(promoData);
   return (
     <section className="h-[400px] bg-back-banner w-full  px-4">
       <div className="flex w-full h-full">
@@ -20,6 +20,7 @@ export const Banner = () => {
               description={promoItem.description}
               src={promoItem.src}
               alt={promoItem.alt}
+              price={promoItem.price}
             />
           ))}
         </ActiveSlides>

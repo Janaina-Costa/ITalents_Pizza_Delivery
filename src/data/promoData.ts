@@ -5,6 +5,7 @@ const promoData = [
     description: 'Massa bla la bla alala ',
     alt: 'imagem-pizza-promo',
     src: 'src/assets/pizza1.png',
+    price: 60,
   },
   {
     id: 2,
@@ -12,6 +13,7 @@ const promoData = [
     description: 'Massa bla la bla alala ',
     alt: 'imagem-pizza-promo',
     src: 'src/assets/napolitana.png',
+    price: 40,
   },
   {
     id: 3,
@@ -19,6 +21,7 @@ const promoData = [
     description: 'Massa bla la bla alala ',
     alt: 'imagem-pizza-promo',
     src: 'src/assets/marguerita.png',
+    price: 30,
   },
 ];
 

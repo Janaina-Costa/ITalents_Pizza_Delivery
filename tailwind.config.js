@@ -19,11 +19,17 @@ export default {
         'primary-green-1': '#5BF600',
         'primary-green-2': '#57EB00',
         'primary-green-3': '#1A4600',
-        'primary-green-4': '#0F2900'
+        'primary-green-4': '#0F2900',
+
       },
       backgroundImage: {
-        'back-banner':'url("./src/assets/backbanner.png")'
-      }
+        'back-banner':'url("./src/assets/backbanner.png")',
+        'bg-main-menu':'url("./src/assets/backmain.png")',
+
+      },
+      dropShadow:{
+        'shadow-logo':'5px 2px 3px rgba(0,0,0,0.4)'
+      },
     },
   },
   plugins: [],
