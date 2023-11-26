@@ -2,7 +2,7 @@ export const Logo = () => (
   <>
     <p
       className="text-center text-5xl font-bodoni z-50
-             cursor-pointer text-shadow "
+             cursor-pointer drop-shadow-shadow-logo "
     >
       <span className="text-[#00913b]">D</span>
       <span className="text-primary-red-1">e</span>
