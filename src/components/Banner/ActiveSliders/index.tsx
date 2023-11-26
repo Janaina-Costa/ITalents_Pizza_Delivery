@@ -20,8 +20,8 @@ export const ActiveSlides = ({ children }: IProps) => (
     loop
     spaceBetween={60}
     centeredSlides
-    onSlideChange={() => console.log('slide change')}
-    onSwiper={(swiper) => console.log(swiper)}
+    // onSlideChange={() => console.log('')}
+    // onSwiper={(swiper) => console.log('')}
   >
     {children.map((element, index) => (
       <SwiperSlide key={index} className="swiperSlide">

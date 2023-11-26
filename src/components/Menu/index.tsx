@@ -1,3 +1,5 @@
+/* eslint-disable no-undef */
+/* eslint-disable no-useless-return */
 /* eslint-disable array-callback-return */
 /* eslint-disable consistent-return */
 import { useEffect, useState } from 'react';
@@ -33,9 +35,8 @@ const dataBtn = [
 export const Menu = () => {
   const [listButtonsMenu, setListButtonsMenu] =
     useState<IPropsBtnMenu[]>(dataBtn);
-  const [listProductItems, setProductItems] = useState(itemsData);
-
-  console.log(listProductItems);
+  const [listProductItems, setListProductItems] = useState(itemsData);
+  const [idSelected, setIdSelected] = useState('');
 
   const handleButtonClick = (id: string) => {
     setListButtonsMenu((prev) => {
@@ -57,12 +58,15 @@ export const Menu = () => {
         );
       }
     });
+
+    setIdSelected(id);
+
+    setListProductItems((prev) => {
+      return prev.map((item) => (item.idProduct === id ? { ...item } : item));
+    });
   };
 
   useEffect(() => {
-    setProductItems((prev) =>
-      prev.filter((item) => item.idProduct === 'item-pizza-trad'),
-    );
     setListButtonsMenu((prev) =>
       prev.map((btn) =>
         btn.id === 'item-pizza-trad'
@@ -95,17 +99,21 @@ export const Menu = () => {
       </section>
 
       <section className="grid grid-cols-4 justify-items-center">
-        {listProductItems.map((item) => (
-          <ItemMenuCard
-            key={item.idProduct}
-            idProduct={item.idProduct}
-            data={item.items.map((dataItems) => {
-              const data = { ...dataItems };
-              return data;
-            })}
-            value={0}
-          />
-        ))}
+        {listProductItems.map((item) =>
+          idSelected === item.idProduct ? (
+            <ItemMenuCard
+              key={item.idProduct}
+              idProduct={idSelected}
+              data={item.items.map((dataItems) => {
+                const data = { ...dataItems };
+                return data;
+              })}
+              value={0}
+            />
+          ) : (
+            ''
+          ),
+        )}
       </section>
     </section>
   );
