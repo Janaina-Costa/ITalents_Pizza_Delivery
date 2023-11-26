@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 import promoData from '../../data/promoData';
-import { IPropsItems } from '../../types/interface/promotions';
+import { IPropsItems } from '../../types/interface/product';
 
 import { ActiveSlides } from './ActiveSliders';
 import { PromoItem } from './PromotionItems';
@@ -9,7 +9,7 @@ import { PromoItem } from './PromotionItems';
 export const Banner = () => {
   const [itemPromo, setItemPromo] = useState<IPropsItems[]>(promoData);
   return (
-    <section className="h-[400px] bg-back-banner w-full  px-4">
+    <section className="h-[400px] bg-back-banner w-full rounded-1xl px-4">
       <div className="flex w-full h-full">
         <ActiveSlides>
           {itemPromo.map((promoItem) => (

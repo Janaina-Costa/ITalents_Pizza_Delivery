@@ -1,8 +1,13 @@
 export interface IPropsItems {
-  id: number;
+  id?: string;
   title: string;
   description: string;
   src: string;
   alt: string;
   price: number;
+}
+
+export interface IPropsProduct {
+  idProduct: string;
+  items: IPropsItems;
 }

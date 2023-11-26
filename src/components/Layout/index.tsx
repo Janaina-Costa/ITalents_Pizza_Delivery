@@ -6,7 +6,7 @@ import { Logo } from '../Logo';
 const Layout = () => (
   <>
     <header className="z-50 w-full ">
-      <nav className="flex items-center max-w-7xl mx-auto px-6 py-3 bg-gradient-to-b from-[#505050] from-0% via-[rgba(31,30,30,1)] via[49%] to-black to-100%">
+      <nav className="flex items-center max-w-7xl mx-auto  py-3 bg-transparent">
         <div className="flex flex-grow items-center ">
           <div className="flex flex-col relative">
             <Logo />
