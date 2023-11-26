@@ -36,7 +36,7 @@ export const Menu = () => {
   const [listButtonsMenu, setListButtonsMenu] =
     useState<IPropsBtnMenu[]>(dataBtn);
   const [listProductItems, setListProductItems] = useState(itemsData);
-  const [idSelected, setIdSelected] = useState('');
+  const [idSelected, setIdSelected] = useState('item-pizza-trad');
 
   const handleButtonClick = (id: string) => {
     setListButtonsMenu((prev) => {
