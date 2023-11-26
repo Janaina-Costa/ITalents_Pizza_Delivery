@@ -15,7 +15,7 @@ export const ItemMenuCard = ({ data, value, idProduct }: IProps) => {
     <>
       {data.map((item) => (
         <div
-          className="w-60 p-2 bg-back-banner rounded-xl mb-8"
+          className="w-60 h-72  p-2 bg-back-banner rounded-xl mb-8"
           id={idProduct}
           key={item.id}
         >
@@ -28,7 +28,7 @@ export const ItemMenuCard = ({ data, value, idProduct }: IProps) => {
 
           <div className="text-left overflow-hidden mt-1">
             <h1 className="font-extrabold">{item.title}</h1>
-            <p className="text-xs text-gray-400 break-words">
+            <p className="text-xs text-gray-400 h-8 break-words">
               {item.description}
             </p>
           </div>
