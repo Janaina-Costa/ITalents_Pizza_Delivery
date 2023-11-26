@@ -14,7 +14,11 @@ export const ItemMenuCard = ({ data, value, idProduct }: IProps) => {
   return (
     <>
       {data.map((item) => (
-        <div className="w-60 p-2 bg-back-banner rounded-xl mb-8" id={idProduct}>
+        <div
+          className="w-60 p-2 bg-back-banner rounded-xl mb-8"
+          id={idProduct}
+          key={item.id}
+        >
           <div>
             <p className="text-left font-semibold">R${item.price} </p>
             <div className="flex items-center justify-center">

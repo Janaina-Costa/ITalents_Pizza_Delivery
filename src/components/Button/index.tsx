@@ -4,6 +4,7 @@ import { ButtonHTMLAttributes } from 'react';
 interface IProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   type: 'button' | 'reset' | 'submit';
   isSelected: boolean;
+  onClick: (e: any) => void;
 }
 
 export const Button = ({
@@ -12,6 +13,8 @@ export const Button = ({
   className,
   type = 'button',
   isSelected,
+  name,
+  value,
 }: IProps) => (
   <button
     className={`${
@@ -30,6 +33,8 @@ export const Button = ({
     `}
     onClick={onClick}
     type={type}
+    name={name}
+    value={value}
   >
     {children}
   </button>
