@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
 /* eslint-disable no-useless-return */
 /* eslint-disable array-callback-return */
@@ -21,7 +22,7 @@ const dataBtn = [
     id: 'item-pizza-trad',
     name: 'Pizzas Tradicionais',
     value: 'traditional',
-    isSelectedButton: false,
+    isSelectedButton: true,
   },
   {
     id: 'item-pizza-sweet',
@@ -60,10 +61,6 @@ export const Menu = () => {
     });
 
     setIdSelected(id);
-
-    setListProductItems((prev) => {
-      return prev.map((item) => (item.idProduct === id ? { ...item } : item));
-    });
   };
 
   useEffect(() => {
