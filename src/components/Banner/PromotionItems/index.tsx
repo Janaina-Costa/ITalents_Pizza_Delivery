@@ -1,32 +1,35 @@
 import { IPropsItems } from '../../../types/interface/product';
 import { Button } from '../../Button';
 
-export const PromoItem = ({
-  description,
-  src,
-  title,
-  alt,
-  price,
-}: IPropsItems) => (
+export const PromoItem = ({ description, src, title, alt }: IPropsItems) => (
   <section className="flex justify-between w-full ">
     <section className="flex flex-col items-start justify-around pl-10 w-[665px]">
       <div className="flex flex-col gap-7">
-        <h1 className="text-6xl font-extrabold break-words w-11/12">{title}</h1>
-        <p className="text-xl">{description} </p>
+        <h1
+          className="text-6xl font-extrabold break-words w-11/12 max-sm:text-[2rem]
+
+        "
+        >
+          {title}
+        </h1>
+        <p className="text-xl max-sm:text-xs">{description} </p>
       </div>
       <div>
-        <Button isSelected className="" type="button">
-          Adicionar à sacola
+        <Button isSelected className="max-sm:text-xs max-sm:p-3" type="button">
+          Confira a promoção
         </Button>
       </div>
     </section>
 
     <section className=" flex h-full items-center relative  ">
-      <p className="bg-gradient-to-r from-primary-red-1 from-0% via-primary-red-0 via-[49%] to-primary-red-2 to-100% rounded-full px-8 text-xl font-bold w-32">
-        R$ {price}
-      </p>
-
-      <img className="w-[400px] " src={src} alt={alt} />
+      <img
+        className="w-[400px]
+        max-sm:w-[998px] max-sm:ml-3
+        max-md:w-[468px]
+        "
+        src={src}
+        alt={alt}
+      />
     </section>
     <div />
   </section>

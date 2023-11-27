@@ -75,10 +75,12 @@ export const Menu = () => {
 
   return (
     <section className="w-full">
-      <section className="mt-8 mb-8">
-        <h1 className="text-5xl font-semibold mb-8 px-10">Menu</h1>
+      <section className="mt-8 mb-8 flex flex-col flex-wrap">
+        <h1 className="text-5xl font-semibold mb-8 px-10 max-md:text-3xl">
+          Menu
+        </h1>
 
-        <div className="flex justify-start gap-4 px-10 list-btn">
+        <div className="flex justify-start gap-4 px-8 w-full overflow-hidden max-sm:flex-col">
           {listButtonsMenu.map((btn) => (
             <Button
               key={btn.value}
@@ -95,7 +97,12 @@ export const Menu = () => {
         </div>
       </section>
 
-      <section className="grid grid-cols-4 justify-items-center">
+      <section
+        className="grid grid-cols-4 w-full justify-items-center max-sm:grid-cols-1
+      max-md:grid-cols-2
+      max-lg:grid-cols-3
+     "
+      >
         {listProductItems.map((item) =>
           idSelected === item.idProduct ? (
             <ItemMenuCard

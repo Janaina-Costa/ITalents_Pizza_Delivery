@@ -1,10 +1,11 @@
+/* eslint-disable react/require-default-props */
 /* eslint-disable react/button-has-type */
 import { ButtonHTMLAttributes } from 'react';
 
 interface IProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   type: 'button' | 'reset' | 'submit';
   isSelected: boolean;
-  onClick: (e: any) => void;
+  onClick?: (e: any) => void;
 }
 
 export const Button = ({

@@ -30,6 +30,9 @@ export default {
       dropShadow:{
         'shadow-logo':'5px 2px 3px rgba(0,0,0,0.4)'
       },
+      screens:{
+        'sm':'560px',
+      }
     },
   },
   plugins: [],

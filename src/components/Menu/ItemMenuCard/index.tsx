@@ -15,7 +15,7 @@ export const ItemMenuCard = ({ data, value, idProduct }: IProps) => {
     <>
       {data.map((item) => (
         <div
-          className="w-60 h-72  p-2 bg-back-banner rounded-xl mb-8"
+          className="w-60  p-2 bg-back-banner bg-cover bg-no-repeat rounded-xl mb-8 overflow-hidden max-sm:w-[80%] max-md:w-[90%]"
           id={idProduct}
           key={item.id}
         >
