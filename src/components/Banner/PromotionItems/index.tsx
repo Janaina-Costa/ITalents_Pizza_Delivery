@@ -3,7 +3,7 @@ import { Button } from '../../Button';
 
 export const PromoItem = ({ description, src, title, alt }: IPropsItems) => (
   <section className="flex justify-between w-full ">
-    <section className="flex flex-col items-start justify-around pl-10 w-[665px]">
+    <section className="flex flex-col items-start justify-around pl-10 w-[665px] max-sm:pl-2">
       <div className="flex flex-col gap-7">
         <h1
           className="text-6xl font-extrabold break-words w-11/12 max-sm:text-[2rem]
