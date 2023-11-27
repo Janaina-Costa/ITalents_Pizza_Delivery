@@ -16,7 +16,10 @@ const Input = ({ hasIconLeft = false, className, ...props }: IInput) => {
   };
 
   return (
-    <div className="" style={props.style}>
+    <div
+      className="w-full flex justify-center items-center"
+      style={props.style}
+    >
       {hasIconLeft ? <div className="">{props.children}</div> : ''}
       <input
         type={props.type}
