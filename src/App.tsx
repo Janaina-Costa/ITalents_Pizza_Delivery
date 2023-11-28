@@ -2,9 +2,11 @@ import { Route, Routes } from 'react-router-dom';
 
 import './App.css';
 import Layout from './components/Layout';
+import { Bag } from './pages/Bag';
 import { Home } from './pages/Home';
 import { Login } from './pages/Login';
 import { PageNotFound } from './pages/NotFound';
+import { Promotions } from './pages/Promotions';
 import { Recover } from './pages/Recover';
 import { Register } from './pages/Register';
 
@@ -15,7 +17,9 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/recover" element={<Recover />} />
+        <Route path="/recovery" element={<Recover />} />
+        <Route path="/promotions" element={<Promotions />} />
+        <Route path="/bag" element={<Bag />} />
       </Route>
       <Route path="*" element={<PageNotFound />} />
     </Routes>
