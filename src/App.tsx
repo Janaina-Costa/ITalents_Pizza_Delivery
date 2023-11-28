@@ -4,6 +4,7 @@ import './App.css';
 import Layout from './components/Layout';
 import { Home } from './pages/Home';
 import { Login } from './pages/Login';
+import { PageNotFound } from './pages/NotFound';
 import { Recover } from './pages/Recover';
 import { Register } from './pages/Register';
 
@@ -16,6 +17,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/recover" element={<Recover />} />
       </Route>
+      <Route path="*" element={<PageNotFound />} />
     </Routes>
   );
 }
