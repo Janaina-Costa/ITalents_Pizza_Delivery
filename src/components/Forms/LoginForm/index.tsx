@@ -7,9 +7,9 @@ import Input from '../../Input';
 export const LoginForm = () => {
   return (
     <form className=" w-full flex flex-col justify-center items-center">
-      <h1 className="text-center mt-4 ">
+      <p className="text-center mt-4 ">
         Use suas credenciais para realizar o login.
-      </h1>
+      </p>
       <Divider />
       <div className="flex flex-col gap-8 w-full items-center justify-center mb-12">
         <Input
