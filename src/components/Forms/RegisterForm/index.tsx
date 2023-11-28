@@ -4,14 +4,19 @@ import { Button } from '../../Button';
 import { Divider } from '../../Divider';
 import Input from '../../Input';
 
-export const LoginForm = () => {
+export const RegisterForm = () => {
   return (
     <form className=" w-full flex flex-col justify-center items-center">
       <p className="text-center mt-4 ">
-        Use suas credenciais para realizar o login.
+        Preencha os campos para criar o seu cadastro.
       </p>
       <Divider />
       <div className="flex flex-col gap-8 w-full items-center justify-center mb-12">
+        <Input
+          placeholder="Digite seu nome"
+          type="text"
+          className="bg-transparent py-5 pl-4 w-full max-w-full rounded outline-none"
+        />
         <Input
           placeholder="Digite seu e-mail"
           type="email"
@@ -22,33 +27,28 @@ export const LoginForm = () => {
           type="password"
           className="bg-transparent py-5 pl-4 w-full max-w-full rounded outline-none"
         />
+        <Input
+          placeholder="Repita sua senha"
+          type="password"
+          className="bg-transparent py-5 pl-4 w-full max-w-full rounded outline-none"
+        />
         <Button
           isSelected
           type="submit"
           className="w-full max-w-full rounded-lg"
         >
-          Entrar
+          Cadastrar
         </Button>
       </div>
 
       <div>
         <p>
-          Esqueceu sua senha?{' '}
+          Já tem cadastro?{' '}
           <span className="text-primary-red-1">
-            <Link to="/recovery">Clique aqui</Link>
+            <Link to="/login">Fazer login</Link>
           </span>{' '}
         </p>
       </div>
-      <Divider />
-
-      <Button
-        isSelected
-        type="button"
-        className="w-full max-w-full rounded-lg mb-8
-        "
-      >
-        Quero me cadastrar
-      </Button>
     </form>
   );
 };
