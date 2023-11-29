@@ -6,8 +6,8 @@ export const itemsData = [
         id: '1',
         title: 'Napolitana',
         description: 'Mussarela, azeitona, tomate, manjericão, massa finíssima',
-        alt: 'imagem-pizza-promo',
-        src: 'src/assets/napolitana.png',
+        alt: 'imagem-pizza-promo-novo',
+        src: '/src/assets/napolitana.png',
         price: 40,
       },
       {
@@ -15,7 +15,7 @@ export const itemsData = [
         title: 'Napolitana',
         description: 'Mussarela, azeitona, tomate, manjericão, massa finíssima',
         alt: 'imagem-pizza-promo',
-        src: 'src/assets/napolitana.png',
+        src: '/src/assets/napolitana.png',
         price: 40,
       },
       {
@@ -23,7 +23,7 @@ export const itemsData = [
         title: 'Napolitana',
         description: 'Mussarela, azeitona, tomate, manjericão, massa finíssima',
         alt: 'imagem-pizza-promo',
-        src: 'src/assets/napolitana.png',
+        src: '/src/assets/napolitana.png',
         price: 40,
       },
       {
@@ -31,7 +31,7 @@ export const itemsData = [
         title: 'Napolitana',
         description: 'Mussarela, azeitona, tomate, manjericão, massa finíssima',
         alt: 'imagem-pizza-promo',
-        src: 'src/assets/napolitana.png',
+        src: '/src/assets/napolitana.png',
         price: 40,
       },
       {
@@ -39,7 +39,7 @@ export const itemsData = [
         title: 'Napolitana',
         description: 'Mussarela, azeitona, tomate, manjericão, massa finíssima',
         alt: 'imagem-pizza-promo',
-        src: 'src/assets/napolitana.png',
+        src: '/src/assets/napolitana.png',
         price: 40,
       },
       {
@@ -47,7 +47,7 @@ export const itemsData = [
         title: 'Napolitana',
         description: 'Mussarela, azeitona, tomate, manjericão, massa finíssima',
         alt: 'imagem-pizza-promo',
-        src: 'src/assets/napolitana.png',
+        src: '/src/assets/napolitana.png',
         price: 40,
       },
       {
@@ -55,7 +55,7 @@ export const itemsData = [
         title: 'Napolitana',
         description: 'Mussarela, azeitona, tomate, manjericão, massa finíssima',
         alt: 'imagem-pizza-promo',
-        src: 'src/assets/napolitana.png',
+        src: '/src/assets/napolitana.png',
         price: 40,
       },
       {
@@ -63,7 +63,7 @@ export const itemsData = [
         title: 'Napolitana',
         description: 'Mussarela, azeitona, tomate, manjericão, massa finíssima',
         alt: 'imagem-pizza-promo',
-        src: 'src/assets/napolitana.png',
+        src: '/src/assets/napolitana.png',
         price: 40,
       },
     ],
@@ -76,7 +76,7 @@ export const itemsData = [
         title: 'Banana com Canela',
         description: 'Mussarela, canela, banana, cravo',
         alt: 'imagem-pizza-promo',
-        src: 'src/assets/napolitana.png',
+        src: '/src/assets/napolitana.png',
         price: 40,
       },
       {
@@ -84,7 +84,7 @@ export const itemsData = [
         title: 'Banana com Canela',
         description: 'Mussarela, canela, banana, cravo',
         alt: 'imagem-pizza-promo',
-        src: 'src/assets/napolitana.png',
+        src: '/src/assets/napolitana.png',
         price: 40,
       },
       {
@@ -92,7 +92,7 @@ export const itemsData = [
         title: 'Banana com Canela',
         description: 'Mussarela, canela, banana, cravo',
         alt: 'imagem-pizza-promo',
-        src: 'src/assets/napolitana.png',
+        src: '/src/assets/napolitana.png',
         price: 40,
       },
       {
@@ -100,7 +100,7 @@ export const itemsData = [
         title: 'Banana com Canela',
         description: 'Mussarela, canela, banana, cravo',
         alt: 'imagem-pizza-promo',
-        src: 'src/assets/napolitana.png',
+        src: '/src/assets/napolitana.png',
         price: 40,
       },
       {
@@ -108,7 +108,7 @@ export const itemsData = [
         title: 'Banana com Canela',
         description: 'Mussarela, canela, banana, cravo',
         alt: 'imagem-pizza-promo',
-        src: 'src/assets/napolitana.png',
+        src: '/src/assets/napolitana.png',
         price: 40,
       },
       {
@@ -116,7 +116,7 @@ export const itemsData = [
         title: 'Banana com Canela',
         description: 'Mussarela, canela, banana, cravo',
         alt: 'imagem-pizza-promo',
-        src: 'src/assets/napolitana.png',
+        src: '/src/assets/napolitana.png',
         price: 40,
       },
       {
@@ -124,7 +124,7 @@ export const itemsData = [
         title: 'Banana com Canela',
         description: 'Mussarela, canela, banana, cravo',
         alt: 'imagem-pizza-promo',
-        src: 'src/assets/napolitana.png',
+        src: '/src/assets/napolitana.png',
         price: 40,
       },
       {
@@ -132,7 +132,7 @@ export const itemsData = [
         title: 'Banana com Canela',
         description: 'Mussarela, canela, banana, cravo',
         alt: 'imagem-pizza-promo',
-        src: 'src/assets/napolitana.png',
+        src: '/src/assets/napolitana.png',
         price: 40,
       },
     ],

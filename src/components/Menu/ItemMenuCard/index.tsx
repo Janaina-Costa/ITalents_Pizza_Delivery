@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
 
 import { Basket } from '@phosphor-icons/react';
+import { Link } from 'react-router-dom';
 
 import { IPropsItems } from '../../../types/interface/product';
 
@@ -21,9 +22,11 @@ export const ItemMenuCard = ({ data, value, idProduct }: IProps) => {
         >
           <div>
             <p className="text-left font-semibold">R${item.price} </p>
-            <div className="flex items-center justify-center">
-              <img src={item.src} alt={item.alt} />
-            </div>
+            <Link to={`/product/${item.id}`} state={item.id}>
+              <div className="flex items-center justify-center">
+                <img src={item.src} alt={item.alt} />
+              </div>
+            </Link>
           </div>
 
           <div className="text-left overflow-hidden mt-1">
