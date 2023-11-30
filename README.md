@@ -1,30 +1,23 @@
-# React + TypeScript + Vite
+# Delizzia Pizzaria
+<img src='src/assets/preview.png'/>
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Projeto desenvolvido para entrega de atividade  do curso full stack iTalents - módulo :Roteamento.
+ Trata-se de uma e-commerce de pizzaria, com a finalidade de venda online de produtos.
+ O layout do projeto foi inspirado em alguns designes disponíveis Pinterest e a partir dessas inspirações alguns elementos foram criados de maneira personalizada, como o Background que foi totalmente desenvolvido no Canvas.
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+  ### Requisitos para entrega:
+    * Mínimo 4 páginas
+    * Envio de dados via rotas de parâmetros
+    * Página 404 para rotas não encontradas
+    * Estilização de todos os componentes
 
-## Expanding the ESLint configuration
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Tecnologia
+- Vite
+- React
+- TypeScript
+- React-router-dom
+- Tailwind css
+- Swiper (Slide dos produtos)
 
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
