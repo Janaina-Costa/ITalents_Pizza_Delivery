@@ -1,10 +1,11 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { Button } from '../../Button';
 import { Divider } from '../../Divider';
 import Input from '../../Input';
 
 export const LoginForm = () => {
+  const navigate = useNavigate();
   return (
     <form className=" w-full flex flex-col justify-center items-center">
       <p className="text-center mt-4 ">
@@ -46,6 +47,7 @@ export const LoginForm = () => {
         type="button"
         className="w-full max-w-full rounded-lg mb-8
         "
+        onClick={() => navigate('/register')}
       >
         Quero me cadastrar
       </Button>

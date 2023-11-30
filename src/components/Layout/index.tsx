@@ -10,7 +10,10 @@ const Layout = () => (
       <nav className="flex items-center max-w-7xl mx-auto  py-3 px-2 bg-transparent">
         <div className="flex flex-grow items-center ">
           <div className="flex flex-col relative">
-            <Logo />
+            <Link to="/">
+              {' '}
+              <Logo />
+            </Link>
           </div>
         </div>
         <ul
