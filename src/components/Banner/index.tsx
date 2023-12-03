@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 import promoData from '../../data/promoData';
-import { IPropsItems } from '../../types/interface/product';
+import { IPropsItems } from '../../types/interface/Product';
 
 import { ActiveSlides } from './ActiveSliders';
 import { PromoItem } from './PromotionItems';
