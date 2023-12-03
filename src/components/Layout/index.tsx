@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { Link, Outlet } from 'react-router-dom';
 
-import { AuthContext } from '../../context/AuthContext';
+import { AuthContext } from '../../contexts/AuthContext';
 import { Button } from '../Button';
 import MenuIcon from '../Icons/MenuIcon';
 import { Logo } from '../Logo';
