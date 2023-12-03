@@ -1,7 +1,7 @@
 import { ChangeEvent, FormEvent, useContext, useState } from 'react';
 
 import { LoginForm } from '../../components/Forms/LoginForm';
-import { AuthContext } from '../../context/AuthContext';
+import { AuthContext } from '../../contexts/AuthContext';
 
 export const Login = () => {
   const [inputValue, setInputValue] = useState({
