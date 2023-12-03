@@ -1,11 +1,39 @@
+import { Eye, EyeSlash } from '@phosphor-icons/react';
+import { ChangeEvent, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { Button } from '../../Button';
 import { Divider } from '../../Divider';
 import Input from '../../Input';
 
-export const LoginForm = () => {
+interface IProps {
+  value: {
+    email: string;
+    password: string;
+  };
+  onChangeInputEmail: (e: ChangeEvent<HTMLInputElement>) => void;
+  onChangeInputPassword: (e: ChangeEvent<HTMLInputElement>) => void;
+}
+
+export const LoginForm = ({
+  value,
+  onChangeInputEmail,
+  onChangeInputPassword,
+}: IProps) => {
+  const [isHidePass, setIsHidePass] = useState<boolean>(false);
   const navigate = useNavigate();
+
+  const handleClickIconPassword = () => {
+    setIsHidePass((prev) => !prev);
+  };
+
+  const handleChangeInputEmail = (e: ChangeEvent<HTMLInputElement>) => {
+    onChangeInputEmail(e);
+  };
+  const handleChangeInputPassword = (e: ChangeEvent<HTMLInputElement>) => {
+    onChangeInputPassword(e);
+  };
+
   return (
     <form className=" w-full flex flex-col justify-center items-center">
       <p className="text-center mt-4 ">
@@ -17,12 +45,21 @@ export const LoginForm = () => {
           placeholder="Digite seu e-mail"
           type="email"
           className="bg-transparent py-5 pl-4 w-full max-w-full rounded outline-none"
+          value={value.email}
+          onChange={handleChangeInputEmail}
         />
         <Input
           placeholder="Digite sua senha"
-          type="password"
+          type={isHidePass ? 'text' : 'password'}
+          hasPassword
           className="bg-transparent py-5 pl-4 w-full max-w-full rounded outline-none"
-        />
+          value={value.password}
+          onClickIconPassword={handleClickIconPassword}
+          onChange={handleChangeInputPassword}
+        >
+          {isHidePass ? <EyeSlash /> : <Eye weight="fill" />}
+        </Input>
+
         <Button
           isSelected
           type="submit"

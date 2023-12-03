@@ -12,7 +12,7 @@ import { itemsData } from '../../data/itemsData';
 export const Product = () => {
   const { id } = useParams();
   const [isFavorite, setIsFavorite] = useState<boolean>(false);
-  const [count, setCount] = useState<number>(0);
+  const [count, setCount] = useState<number>(1);
   const [total, setTotal] = useState<number>();
 
   const navigate = useNavigate();
@@ -48,6 +48,7 @@ export const Product = () => {
   const handleChangeInputCount = (e: ChangeEvent<HTMLInputElement>) => {
     setCount(Number(e.target.value));
   };
+  // TODO quando estiver com zero perguntar se quer remover o item da sacola
 
   useEffect(() => {
     if (!id) {

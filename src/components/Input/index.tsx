@@ -1,8 +1,11 @@
 /* eslint-disable react/require-default-props */
+
 import { InputHTMLAttributes, useState } from 'react';
 
 interface IInput extends InputHTMLAttributes<HTMLInputElement> {
   hasIconLeft?: boolean;
+  hasPassword?: boolean;
+  onClickIconPassword?: () => void;
 }
 
 const Input = ({ hasIconLeft = false, className, ...props }: IInput) => {
@@ -15,9 +18,13 @@ const Input = ({ hasIconLeft = false, className, ...props }: IInput) => {
     setIsFocused(false);
   };
 
+  const handleClickIconPassword = () => {
+    props.onClickIconPassword?.();
+  };
+
   return (
     <div
-      className="w-full flex justify-center items-center"
+      className="w-full flex justify-center items-center relative"
       style={props.style}
     >
       {hasIconLeft ? <div className="">{props.children}</div> : ''}
@@ -31,6 +38,7 @@ const Input = ({ hasIconLeft = false, className, ...props }: IInput) => {
         }
         p-[.5rem] outline-none
         placeholder:text-base
+        relative
         `}
         onFocus={handleInputFocus}
         onBlur={handleInputBlur}
@@ -38,6 +46,17 @@ const Input = ({ hasIconLeft = false, className, ...props }: IInput) => {
         onKeyUp={props.onKeyUp}
         value={props.value}
       />
+      {props.hasPassword ? (
+        <button
+          type="button"
+          className="absolute right-4 bg-transparent border-none"
+          onClick={handleClickIconPassword}
+        >
+          {props.children}{' '}
+        </button>
+      ) : (
+        ''
+      )}
     </div>
   );
 };
