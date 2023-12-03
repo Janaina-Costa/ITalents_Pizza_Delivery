@@ -10,6 +10,7 @@ import { Product } from './pages/Product';
 import { Promotions } from './pages/Promotions';
 import { Recover } from './pages/Recover';
 import { Register } from './pages/Register';
+import { ProtectedRoute } from './routes/ProtectedRoute';
 
 function App() {
   return (
@@ -20,7 +21,15 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/recovery" element={<Recover />} />
         <Route path="/promotions" element={<Promotions />} />
-        <Route path="/bag" element={<Bag />} />
+
+        <Route
+          path="/bag"
+          element={
+            <ProtectedRoute>
+              <Bag />
+            </ProtectedRoute>
+          }
+        />
         <Route path="/product/:id" element={<Product />} />
       </Route>
       <Route path="*" element={<PageNotFound />} />

@@ -1,5 +1,6 @@
+import { SignOut } from '@phosphor-icons/react';
 import { useContext } from 'react';
-import { Link, Outlet } from 'react-router-dom';
+import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
 
 import { AuthContext } from '../../contexts/AuthContext';
 import { Button } from '../Button';
@@ -7,8 +8,9 @@ import MenuIcon from '../Icons/MenuIcon';
 import { Logo } from '../Logo';
 
 const Layout = () => {
-  const { userIsLogged } = useContext(AuthContext);
-  console.log(userIsLogged);
+  const { userIsLogged, signOut } = useContext(AuthContext);
+  const location = useLocation();
+  const navigate = useNavigate();
 
   return (
     <>
@@ -27,24 +29,47 @@ const Layout = () => {
           max-md:hidden
         "
           >
-            <li className="cursor-pointer hover:text-primary-red-0 ease-in-out duration-300">
-              <Link to="/">Home</Link>
-            </li>
+            {location.pathname === '/' ? (
+              ''
+            ) : (
+              <li className="cursor-pointer hover:text-primary-red-0 ease-in-out duration-300">
+                <Link to="/">Home</Link>
+              </li>
+            )}
             <li className="cursor-pointer  hover:text-primary-red-0 ease-in-out duration-300">
               <Link to="/promotions">Promoções</Link>
             </li>
             <li className="cursor-pointer  hover:text-primary-red-0 ease-in-out duration-300">
               <Link to="bag"> Sacola</Link>
             </li>
-            <li className="cursor-pointer  hover:text-primary-red-0 ease-in-out duration-300">
-              <Link to="/login">Login</Link>
-            </li>
-            <li className="cursor-pointer  hover:text-primary-red-0 ease-in-out duration-300">
-              <Button className="" type="button" isSelected>
-                {/** TODO - alterar para função */}
-                <Link to="/register">Cadastre-se</Link>
-              </Button>
-            </li>
+            {userIsLogged ? (
+              <li className="flex gap-4">
+                <p>Olá, Fulana!</p>
+                <SignOut
+                  className="cursor-pointer text- hover:brightness-105"
+                  size={24}
+                  color="#ffffff"
+                  weight="bold"
+                  onClick={signOut}
+                />
+              </li>
+            ) : (
+              <>
+                <li className="cursor-pointer  hover:text-primary-red-0 ease-in-out duration-300">
+                  <Link to="/login">Login</Link>
+                </li>
+                <li className="cursor-pointer  hover:text-primary-red-0 ease-in-out duration-300">
+                  <Button
+                    className=""
+                    type="button"
+                    isSelected
+                    onClick={() => navigate('/register')}
+                  >
+                    Cadastre-se
+                  </Button>
+                </li>
+              </>
+            )}
           </ul>
           <div className="md:hidden">
             <MenuIcon />{' '}

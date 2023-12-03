@@ -9,6 +9,7 @@ export interface IData {
 
 interface IAuthContextData {
   signIn: (email: string, password: string) => Promise<IData>;
+  signOut: () => void;
   userIsLogged: boolean;
 }
 export const AuthContext = createContext<IAuthContextData>(null!);
