@@ -3,7 +3,7 @@
 import { Basket } from '@phosphor-icons/react';
 import { Link } from 'react-router-dom';
 
-import { IPropsItems } from '../../../types/interface/product';
+import { IPropsItems } from '../../../types/interface/Product';
 
 interface IProps {
   idProduct: string;

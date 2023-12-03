@@ -1,4 +1,4 @@
-import { IPropsItems } from '../../../types/interface/product';
+import { IPropsItems } from '../../../types/interface/Product';
 import { Button } from '../../Button';
 
 export const PromoItem = ({ description, src, title, alt }: IPropsItems) => (

@@ -1,5 +1,5 @@
 import { Eye, EyeSlash } from '@phosphor-icons/react';
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, FormEvent, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { Button } from '../../Button';
@@ -13,12 +13,14 @@ interface IProps {
   };
   onChangeInputEmail: (e: ChangeEvent<HTMLInputElement>) => void;
   onChangeInputPassword: (e: ChangeEvent<HTMLInputElement>) => void;
+  onSubmitLogin: (e: FormEvent) => void;
 }
 
 export const LoginForm = ({
   value,
   onChangeInputEmail,
   onChangeInputPassword,
+  onSubmitLogin,
 }: IProps) => {
   const [isHidePass, setIsHidePass] = useState<boolean>(false);
   const navigate = useNavigate();
@@ -33,9 +35,14 @@ export const LoginForm = ({
   const handleChangeInputPassword = (e: ChangeEvent<HTMLInputElement>) => {
     onChangeInputPassword(e);
   };
-
+  const handleSubmit = (e: FormEvent) => {
+    onSubmitLogin(e);
+  };
   return (
-    <form className=" w-full flex flex-col justify-center items-center">
+    <form
+      className=" w-full flex flex-col justify-center items-center"
+      onSubmit={handleSubmit}
+    >
       <p className="text-center mt-4 ">
         Use suas credenciais para realizar o login.
       </p>
