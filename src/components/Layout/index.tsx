@@ -43,7 +43,7 @@ const Layout = () => {
               <Link to="bag"> Sacola</Link>
             </li>
             {userIsLogged ? (
-              <li className="flex gap-4">
+              <li className="flex gap-4 cursor-pointer hover:text-primary-red-0 ease-in-out duration-300">
                 <p>Olá, Fulana!</p>
                 <SignOut
                   className="cursor-pointer text- hover:brightness-105"

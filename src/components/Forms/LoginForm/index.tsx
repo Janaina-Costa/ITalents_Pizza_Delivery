@@ -1,5 +1,5 @@
 import { Eye, EyeSlash } from '@phosphor-icons/react';
-import { ChangeEvent, FormEvent, useState } from 'react';
+import { ChangeEvent, FormEvent, useEffect, useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { Button } from '../../Button';
@@ -23,7 +23,12 @@ export const LoginForm = ({
   onSubmitLogin,
 }: IProps) => {
   const [isHidePass, setIsHidePass] = useState<boolean>(false);
+  const inputRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    inputRef?.current?.focus();
+  }, []);
 
   const handleClickIconPassword = () => {
     setIsHidePass((prev) => !prev);
@@ -54,6 +59,7 @@ export const LoginForm = ({
           className="bg-transparent py-5 pl-4 w-full max-w-full rounded outline-none"
           value={value.email}
           onChange={handleChangeInputEmail}
+          ref={inputRef}
         />
         <Input
           placeholder="Digite sua senha"

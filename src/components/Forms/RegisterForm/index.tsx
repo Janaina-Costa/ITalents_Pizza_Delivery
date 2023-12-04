@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 
 import { Button } from '../../Button';
@@ -5,6 +6,11 @@ import { Divider } from '../../Divider';
 import Input from '../../Input';
 
 export const RegisterForm = () => {
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    inputRef.current?.focus();
+  }, []);
   return (
     <form className=" w-full flex flex-col justify-center items-center">
       <p className="text-center mt-4 ">
@@ -16,6 +22,7 @@ export const RegisterForm = () => {
           placeholder="Digite seu nome"
           type="text"
           className="bg-transparent py-5 pl-4 w-full max-w-full rounded outline-none"
+          ref={inputRef}
         />
         <Input
           placeholder="Digite seu e-mail"

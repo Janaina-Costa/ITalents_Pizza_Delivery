@@ -1,8 +1,16 @@
+import { useEffect, useRef } from 'react';
+
 import { Button } from '../../Button';
 import { Divider } from '../../Divider';
 import Input from '../../Input';
 
 export const RecoverForm = () => {
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    inputRef.current?.focus();
+  }, []);
+
   return (
     <form className=" w-full flex flex-col justify-center items-center">
       <div>
@@ -20,6 +28,7 @@ export const RecoverForm = () => {
           placeholder="Digite seu e-mail"
           type="email"
           className="bg-transparent py-5 pl-4 w-full max-w-full rounded outline-none"
+          ref={inputRef}
         />
 
         <Button
