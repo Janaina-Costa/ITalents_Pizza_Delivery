@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
 
-import { Basket } from '@phosphor-icons/react';
+import { Tote } from '@phosphor-icons/react';
 import { Link } from 'react-router-dom';
 
 import { IPropsItems } from '../../../types/interface/Product';
@@ -46,7 +46,7 @@ export const ItemMenuCard = ({ data, value, idProduct }: IProps) => {
               type="button"
               className="bg-gradient-to-r from-primary-green-1 from-0% to-primary-green-3 to-100% rounded-2xl px-2"
             >
-              <Basket size={24} color="#ffffff" weight="thin" />
+              <Tote size={24} color="#ffffff" weight="regular" />
             </button>
           </div>
         </div>

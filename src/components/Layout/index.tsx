@@ -1,5 +1,5 @@
-import { SignOut } from '@phosphor-icons/react';
-import { useContext } from 'react';
+import { SignOut, ToteSimple, WhatsappLogo } from '@phosphor-icons/react';
+import { useContext, useState } from 'react';
 import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
 
 import { AuthContext } from '../../contexts/AuthContext';
@@ -11,6 +11,7 @@ const Layout = () => {
   const { userIsLogged, signOut } = useContext(AuthContext);
   const location = useLocation();
   const navigate = useNavigate();
+  const [countItem, setCountItem] = useState(10);
 
   return (
     <>
@@ -25,8 +26,8 @@ const Layout = () => {
             </div>
           </div>
           <ul
-            className="flex items-center justify-end space-x-6
-          max-md:hidden
+            className="flex items-center justify-end space-x-8
+          max-md:hidden relative text-lg
         "
           >
             {location.pathname === '/' ? (
@@ -39,8 +40,29 @@ const Layout = () => {
             <li className="cursor-pointer  hover:text-primary-red-0 ease-in-out duration-300">
               <Link to="/promotions">Promoções</Link>
             </li>
-            <li className="cursor-pointer  hover:text-primary-red-0 ease-in-out duration-300">
-              <Link to="bag"> Sacola</Link>
+            <li className="cursor-pointer flex items-center gap-2 hover:text-primary-red-0 ease-in-out duration-300">
+              <Link to="/promotions">Contato</Link>
+              <WhatsappLogo
+                size={24}
+                weight="light"
+                className="text-primary-green-0"
+              />{' '}
+            </li>
+            <li
+              className={`cursor-pointer hover:text-primary-red-0 ease-in-out duration-300 relative text-center ${
+                countItem > 0 ? 'text-primary-green-2' : ''
+              }`}
+            >
+              <Link to="bag">
+                <ToteSimple size={38} weight="light" />
+              </Link>
+              <span
+                className={`absolute top-2 text-base ${
+                  countItem > 9 ? 'left-[25%]' : 'left-[35%]'
+                } `}
+              >
+                {countItem}
+              </span>
             </li>
             {userIsLogged ? (
               <li className="flex gap-4 cursor-pointer hover:text-primary-red-0 ease-in-out duration-300">
