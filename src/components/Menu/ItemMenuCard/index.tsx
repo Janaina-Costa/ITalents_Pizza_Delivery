@@ -16,25 +16,25 @@ export const ItemMenuCard = ({ data, value, idProduct }: IProps) => {
     <>
       {data.map((item) => (
         <div
-          className="w-60  p-2 bg-back-banner bg-cover bg-no-repeat rounded-xl mb-8 overflow-hidden max-sm:w-[80%] max-md:w-[90%]"
+          className="w-60  p-2 bg-back-banner bg-cover bg-no-repeat rounded-xl mb-8 overflow-hidden max-sm:w-[80%] max-md:w-[90%] cursor-pointer hover:scale-125 transition-all duration-300 ease-in-out "
           id={idProduct}
           key={item.id}
         >
-          <div>
-            <p className="text-left font-semibold">R${item.price} </p>
-            <Link to={`/product/${item.id}`} state={item.id}>
+          <Link to={`/product/${item.id}`} state={item.id}>
+            <div>
+              <p className="text-left font-semibold">R${item.price} </p>
               <div className="flex items-center justify-center">
                 <img src={item.src} alt={item.alt} />
               </div>
-            </Link>
-          </div>
+            </div>
 
-          <div className="text-left overflow-hidden mt-1">
-            <h1 className="font-extrabold">{item.title}</h1>
-            <p className="text-xs text-gray-400 h-8 break-words">
-              {item.description}
-            </p>
-          </div>
+            <div className="text-left overflow-hidden mt-1">
+              <h1 className="font-extrabold">{item.title}</h1>
+              <p className="text-xs text-gray-400 h-8 break-words">
+                {item.description}
+              </p>
+            </div>
+          </Link>
 
           <div className="flex gap-4 items-center mt-2">
             <div className="flex gap-2 bg-gray-800 px-2 rounded-xl">
