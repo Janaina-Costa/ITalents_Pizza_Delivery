@@ -4,6 +4,7 @@ import { Tote } from '@phosphor-icons/react';
 import { Link } from 'react-router-dom';
 
 import { IPropsItems } from '../../../types/interface/Product';
+import { Image } from '../../Image';
 
 interface IProps {
   idProduct: string;
@@ -24,7 +25,11 @@ export const ItemMenuCard = ({ data, value, idProduct }: IProps) => {
             <div>
               <p className="text-left font-semibold">R${item.price} </p>
               <div className="flex items-center justify-center">
-                <img src={item.src} alt={item.alt} />
+                <Image
+                  src={item.src}
+                  alt={item.alt}
+                  className="cursor-pointer"
+                />
               </div>
             </div>
 

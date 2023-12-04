@@ -2,16 +2,45 @@ import { SignOut, ToteSimple, WhatsappLogo } from '@phosphor-icons/react';
 import { useContext, useState } from 'react';
 import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
 
+import image from '../../assets/miau.png';
 import { AuthContext } from '../../contexts/AuthContext';
 import { Button } from '../Button';
 import MenuIcon from '../Icons/MenuIcon';
+import { Image } from '../Image';
 import { Logo } from '../Logo';
 
-const Layout = () => {
+interface IPropsDropdownMenu {
+  onClickMenu: () => void;
+}
+
+const Layout = ({ onClickMenu }: IPropsDropdownMenu) => {
   const { userIsLogged, signOut } = useContext(AuthContext);
   const location = useLocation();
   const navigate = useNavigate();
   const [countItem, setCountItem] = useState(10);
+
+  const handleClickDropDownMenu = () => {
+    onClickMenu();
+  };
+
+  const cartItem = (
+    <li
+      className={`cursor-pointer hover:text-primary-red-0 ease-in-out duration-300 relative text-center ${
+        countItem > 0 ? 'text-primary-green-2' : ''
+      }`}
+    >
+      <Link to="cart">
+        <ToteSimple size={38} weight="light" />
+        <span
+          className={`absolute top-2 text-base ${
+            countItem > 9 ? 'left-[25%]' : 'left-[35%]'
+          } `}
+        >
+          {countItem}
+        </span>
+      </Link>
+    </li>
+  );
 
   return (
     <>
@@ -41,36 +70,27 @@ const Layout = () => {
               <Link to="/promotions">Promoções</Link>
             </li>
             <li className="cursor-pointer flex items-center gap-2 hover:text-primary-red-0 ease-in-out duration-300">
-              <Link to="/promotions">Contato</Link>
               <WhatsappLogo
                 size={24}
                 weight="light"
                 className="text-primary-green-0"
               />{' '}
+              <Link to="/promotions">Contato</Link>
             </li>
-            <li
-              className={`cursor-pointer hover:text-primary-red-0 ease-in-out duration-300 relative text-center ${
-                countItem > 0 ? 'text-primary-green-2' : ''
-              }`}
-            >
-              <Link to="bag">
-                <ToteSimple size={38} weight="light" />
-              </Link>
-              <span
-                className={`absolute top-2 text-base ${
-                  countItem > 9 ? 'left-[25%]' : 'left-[35%]'
-                } `}
-              >
-                {countItem}
-              </span>
-            </li>
+            {cartItem}
             {userIsLogged ? (
-              <li className="flex gap-4 cursor-pointer hover:text-primary-red-0 ease-in-out duration-300">
-                <p>Olá, Fulana!</p>
+              <li className="flex gap-4 items-center ">
+                <p className="cursor-pointer hover:text-primary-red-0 ease-in-out duration-300">
+                  Olá, Fulana!
+                </p>
+                <Image
+                  className="rounded-full w-20 border cursor-pointer"
+                  src={image}
+                  alt=""
+                />
                 <SignOut
-                  className="cursor-pointer text- hover:brightness-105"
+                  className="cursor-pointer text- hover:brightness-105  hover:text-primary-red-0 ease-in-out duration-300"
                   size={24}
-                  color="#ffffff"
                   weight="bold"
                   onClick={signOut}
                 />
@@ -93,12 +113,14 @@ const Layout = () => {
               </>
             )}
           </ul>
-          <div className="md:hidden">
-            <MenuIcon />{' '}
-          </div>
+          <ul className="md:hidden flex items-center gap-8">
+            {cartItem}
+            <li>
+              <MenuIcon onClick={handleClickDropDownMenu} />{' '}
+            </li>
+          </ul>
         </nav>
       </header>
-
       <Outlet />
     </>
   );

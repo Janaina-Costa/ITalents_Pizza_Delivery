@@ -1,5 +1,6 @@
 import { IPropsItems } from '../../../types/interface/Product';
 import { Button } from '../../Button';
+import { Image } from '../../Image';
 
 export const PromoItem = ({ description, src, title, alt }: IPropsItems) => (
   <section className="flex justify-between w-full ">
@@ -22,7 +23,7 @@ export const PromoItem = ({ description, src, title, alt }: IPropsItems) => (
     </section>
 
     <section className=" flex h-full items-center relative  ">
-      <img
+      <Image
         className="w-[400px]
         max-sm:w-[998px] max-sm:ml-3
         max-md:w-[468px]

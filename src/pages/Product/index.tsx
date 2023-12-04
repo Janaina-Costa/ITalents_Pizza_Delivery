@@ -8,6 +8,7 @@ import { Button } from '../../components/Button';
 import { CountButton } from '../../components/CountButton';
 import { Divider } from '../../components/Divider';
 import { itemsData } from '../../data/itemsData';
+import { Image } from '../../components/Image';
 
 export const Product = () => {
   const { id } = useParams();
@@ -61,7 +62,7 @@ export const Product = () => {
   return (
     <div className="bg-black max-w-[40rem] m-auto mt-16 p-8 flex flex-col items-center max-md:mt-0 max-md:h-screen overflow-hidden">
       <div className="w-full relative p-2">
-        <div className=" flex flex-col items-center p-2 bg-back-banner bg-cove w-full h-96 rounded-md">
+        <div className=" flex flex-col items-center p-2 bg-back-banner bg-cove w-full h-96 rounded-md ">
           <div className="w-full  flex justify-between">
             <ArrowCircleLeft
               size={40}
@@ -71,10 +72,10 @@ export const Product = () => {
               className="cursor-pointer hover:brightness-100"
             />
           </div>
-          <img
+          <Image
             src={setData(id!)?.src}
             alt={setData(id!)?.alt}
-            className="absolute top-10"
+            className="absolute left-0"
           />
         </div>
         <HeartStraight

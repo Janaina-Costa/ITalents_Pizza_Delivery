@@ -1,8 +1,10 @@
+import { useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
 import './App.css';
+import { DropwDownMenu } from './components/DropdownModal';
 import Layout from './components/Layout';
-import { Bag } from './pages/Bag';
+import { Cart } from './pages/Cart';
 import { Home } from './pages/Home';
 import { Login } from './pages/Login';
 import { PageNotFound } from './pages/NotFound';
@@ -13,27 +15,42 @@ import { Register } from './pages/Register';
 import { ProtectedRoute } from './routes/ProtectedRoute';
 
 function App() {
-  return (
-    <Routes>
-      <Route element={<Layout />}>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/recovery" element={<Recover />} />
-        <Route path="/promotions" element={<Promotions />} />
+  const [isOpenMenu, setIsOpenMenu] = useState<boolean>(false);
 
-        <Route
-          path="/bag"
-          element={
-            <ProtectedRoute>
-              <Bag />
-            </ProtectedRoute>
-          }
-        />
-        <Route path="/product/:id" element={<Product />} />
-      </Route>
-      <Route path="*" element={<PageNotFound />} />
-    </Routes>
+  const handleClickDropdownMenu = () => {
+    setIsOpenMenu(true);
+  };
+
+  const handleCloseDropdownMenu = () => {
+    setIsOpenMenu(false);
+  };
+  return (
+    <div className="relative">
+      <DropwDownMenu
+        onClick={handleCloseDropdownMenu}
+        className={`${!isOpenMenu && 'hidden '}`}
+      />
+      <Routes>
+        <Route element={<Layout onClickMenu={handleClickDropdownMenu} />}>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/recovery" element={<Recover />} />
+          <Route path="/promotions" element={<Promotions />} />
+
+          <Route
+            path="/cart"
+            element={
+              <ProtectedRoute>
+                <Cart />
+              </ProtectedRoute>
+            }
+          />
+          <Route path="/product/:id" element={<Product />} />
+        </Route>
+        <Route path="*" element={<PageNotFound />} />
+      </Routes>
+    </div>
   );
 }
 
