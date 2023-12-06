@@ -7,9 +7,6 @@ body{
   margin: 0;
   font-family: 'Inter', sans-serif;
   color: #e5e7eb;
-  background-image: url("../src/assets/backmain.png");
-  background-repeat: no-repeat;
-  background-size: cover;
   background-color: rgb(0, 0, 0);
 
 }

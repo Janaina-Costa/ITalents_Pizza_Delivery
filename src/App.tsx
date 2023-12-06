@@ -25,7 +25,7 @@ function App() {
     setIsOpenMenu(false);
   };
   return (
-    <div className="relative">
+    <div className="relative bg-bg-main-menu bg-no-repeat bg-cover ">
       <DropwDownMenu
         onClick={handleCloseDropdownMenu}
         className={`${!isOpenMenu && 'hidden '}`}
