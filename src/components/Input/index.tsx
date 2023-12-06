@@ -48,6 +48,7 @@ const Input: React.ForwardRefExoticComponent<
           onChange={props.onChange}
           onKeyUp={props.onKeyUp}
           value={props.value}
+          name={props.name}
           ref={ref}
         />
         {props.hasPassword ? (

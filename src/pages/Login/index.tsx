@@ -11,11 +11,8 @@ export const Login = () => {
 
   const { signIn } = useContext(AuthContext);
 
-  const handleChangeInputEmail = (e: ChangeEvent<HTMLInputElement>) => {
-    setInputValue({ ...inputValue, email: e.target.value });
-  };
-  const handleChangeInputPassword = (e: ChangeEvent<HTMLInputElement>) => {
-    setInputValue({ ...inputValue, password: e.target.value });
+  const handleChangeValue = (e: ChangeEvent<HTMLInputElement>) => {
+    setInputValue({ ...inputValue, [e.target.name]: e.target.value });
   };
 
   const handleSubmitLogin = async (e: FormEvent) => {
@@ -26,8 +23,8 @@ export const Login = () => {
   return (
     <div className="bg-gray-900 max-w-[40rem] m-auto mt-16 p-8 flex justify-center items-center max-md:mt-0 max-md:h-screen overflow-hidden">
       <LoginForm
-        onChangeInputEmail={handleChangeInputEmail}
-        onChangeInputPassword={handleChangeInputPassword}
+        onChangeInputEmail={handleChangeValue}
+        onChangeInputPassword={handleChangeValue}
         onSubmitLogin={handleSubmitLogin}
         value={{
           email: inputValue.email,

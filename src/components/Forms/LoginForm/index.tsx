@@ -41,6 +41,7 @@ export const LoginForm = ({
     onChangeInputPassword(e);
   };
   const handleSubmit = (e: FormEvent) => {
+    e.preventDefault();
     onSubmitLogin(e);
   };
   return (
@@ -58,6 +59,7 @@ export const LoginForm = ({
           type="email"
           className="bg-transparent py-5 pl-4 w-full max-w-full rounded outline-none"
           value={value.email}
+          name="email"
           onChange={handleChangeInputEmail}
           ref={inputRef}
         />
@@ -67,6 +69,7 @@ export const LoginForm = ({
           hasPassword
           className="bg-transparent py-5 pl-4 w-full max-w-full rounded outline-none"
           value={value.password}
+          name="password"
           onClickIconPassword={handleClickIconPassword}
           onChange={handleChangeInputPassword}
         >
