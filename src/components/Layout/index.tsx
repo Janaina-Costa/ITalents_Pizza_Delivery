@@ -2,7 +2,6 @@ import { SignOut, ToteSimple, WhatsappLogo } from '@phosphor-icons/react';
 import { useContext, useState } from 'react';
 import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
 
-import image from '../../assets/miau.png';
 import { AuthContext } from '../../contexts/AuthContext';
 import { Button } from '../Button';
 import MenuIcon from '../Icons/MenuIcon';
@@ -14,7 +13,7 @@ interface IPropsDropdownMenu {
 }
 
 const Layout = ({ onClickMenu }: IPropsDropdownMenu) => {
-  const { userIsLogged, signOut } = useContext(AuthContext);
+  const { userIsLogged, signOut, userData } = useContext(AuthContext);
   const location = useLocation();
   const navigate = useNavigate();
   const [countItem, setCountItem] = useState(10);
@@ -81,11 +80,11 @@ const Layout = ({ onClickMenu }: IPropsDropdownMenu) => {
             {userIsLogged ? (
               <li className="flex gap-4 items-center ">
                 <p className="cursor-pointer hover:text-primary-red-0 ease-in-out duration-300">
-                  Olá, Fulana!
+                  Olá, {userData?.name}!
                 </p>
                 <Image
                   className="rounded-full w-20 border cursor-pointer"
-                  src={image}
+                  src={userData?.image}
                   alt=""
                 />
                 <SignOut

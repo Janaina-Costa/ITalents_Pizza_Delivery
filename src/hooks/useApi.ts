@@ -1,5 +1,8 @@
 /* eslint-disable consistent-return */
-import api from '../services/api';
+import { api } from '../services/api';
+import { IUser } from '../types/User';
+
+type userCreate = Omit<IUser, 'id' | 'addresses' | 'favorite_product'>;
 
 export const useApi = () => ({
   signIn: async (email: string, password: string) => {
@@ -12,21 +15,24 @@ export const useApi = () => ({
     }
   },
 
-  register: async (
-    name: string,
-    email: string,
-    password: string,
-    phone: string,
-    photoUrl: string,
-  ) => {
+  register: async ({ name, email, image, password, phone }: userCreate) => {
     try {
       const response = await api.post('/user/create', {
         name,
         email,
         password,
         phone,
-        photoUrl,
+        image,
       });
+      return response.data;
+    } catch (err) {
+      console.log(err);
+    }
+  },
+
+  getUserById: async (id: string) => {
+    try {
+      const response = await api.get(`/user/${id}`);
       return response.data;
     } catch (err) {
       console.log(err);

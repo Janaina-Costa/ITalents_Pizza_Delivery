@@ -6,13 +6,13 @@ import { useAuth } from '../hooks/useAuth';
 import { AuthContext } from './AuthContext';
 
 const AuthProvider = ({ children }: { children: JSX.Element }) => {
-  const { loading, signIn, signOut, userIsLogged } = useAuth();
+  const { loading, signIn, signOut, userIsLogged, userData } = useAuth();
   if (loading) {
     return <LoadingSpinner />;
   }
 
   return (
-    <AuthContext.Provider value={{ signIn, userIsLogged, signOut }}>
+    <AuthContext.Provider value={{ signIn, userIsLogged, signOut, userData }}>
       {children}
     </AuthContext.Provider>
   );

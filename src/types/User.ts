@@ -1,6 +1,23 @@
-export type TUser = {
+export interface IAdressUser {
+  _id?: string;
+  cep: string;
+  street: string;
+  number: number;
+  complement: string;
+  neighborhood: string;
+}
+
+export interface IFavoriteProduct {
+  _id: string;
+}
+
+export interface IUser {
   id: string;
-  name?: string;
+  name: string;
   email: string;
-  password?: string;
-};
+  password: string;
+  phone: string;
+  image: string;
+  addresses: IAdressUser[];
+  favorite_product: IFavoriteProduct[];
+}

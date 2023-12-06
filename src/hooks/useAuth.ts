@@ -1,20 +1,28 @@
+/* eslint-disable no-use-before-define */
 /* eslint-disable consistent-return */
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { IData } from '../contexts/AuthContext';
+import { api as apiServer } from '../services/api';
+import { IUser } from '../types/User';
 
 import { useApi } from './useApi';
+
+const USER_DATA = JSON.parse(localStorage.getItem('user-data') || '{}');
 
 export const useAuth = () => {
   const [userIsLogged, setUserIsLogged] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
+  const [userData, setUserData] = useState<IUser | null>(null);
 
   const api = useApi();
 
   const navigate = useNavigate();
   useEffect(() => {
-    if (localStorage.getItem('user-data')) {
+    if (USER_DATA) {
+      apiServer.defaults.headers.Authorization = `Bearer ${USER_DATA.token}`;
+      getUserById(USER_DATA.id);
       setUserIsLogged(true);
     }
     setLoading(false);
@@ -26,6 +34,7 @@ export const useAuth = () => {
       return;
     }
     localStorage.setItem('user-data', JSON.stringify(data));
+    apiServer.defaults.headers.Authorization = `Bearer ${data.token}`;
     navigate('/');
     setUserIsLogged(true);
     return data;
@@ -36,5 +45,11 @@ export const useAuth = () => {
     localStorage.clear();
     navigate('/login');
   };
-  return { userIsLogged, loading, signIn, signOut };
+
+  const getUserById = async (idUser: string) => {
+    const data = await api.getUserById(idUser);
+    setUserData(data);
+  };
+
+  return { userIsLogged, loading, userData, signIn, signOut };
 };
