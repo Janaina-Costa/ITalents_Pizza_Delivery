@@ -17,7 +17,10 @@ export const Login = () => {
 
   const handleSubmitLogin = async (e: FormEvent) => {
     e.preventDefault();
-    signIn(inputValue.email, inputValue.password);
+    const response = await signIn(inputValue.email, inputValue.password);
+    if (!response) {
+      alert('Login ou senha inválidos');
+    }
   };
 
   return (

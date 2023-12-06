@@ -1,6 +1,8 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { RegisterForm } from '../../components/Forms/RegisterForm';
+import { useApi } from '../../hooks/useApi';
 
 export const Register = () => {
   const [inputValue, setInputValue] = useState({
@@ -11,14 +13,26 @@ export const Register = () => {
     phone: '',
     photoUrl: '',
   });
+  const navigate = useNavigate();
+  const { register } = useApi();
 
   const handleChangeValue = (e: ChangeEvent<HTMLInputElement>) => {
     setInputValue({ ...inputValue, [e.target.name]: e.target.value });
   };
 
-  const handleSubmitRegister = (e: FormEvent) => {
+  const handleSubmitRegister = async (e: FormEvent) => {
     e.preventDefault();
-    console.log(inputValue);
+    const response = await register(
+      inputValue.name,
+      inputValue.email,
+      inputValue.password,
+      inputValue.phone,
+      inputValue.photoUrl,
+    );
+    if (response) {
+      alert('Cadastro realizado com sucesso!');
+      navigate('/login');
+    }
   };
 
   return (
@@ -28,7 +42,6 @@ export const Register = () => {
           name: inputValue.name,
           email: inputValue.email,
           password: inputValue.password,
-          confirmPassword: inputValue.confirmPassword,
           phone: inputValue.phone,
           photoUrl: inputValue.photoUrl,
         }}

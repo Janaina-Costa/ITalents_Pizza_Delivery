@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -21,6 +22,9 @@ export const useAuth = () => {
 
   const signIn = async (email: string, password: string) => {
     const data: IData = await api.signIn(email, password);
+    if (!data) {
+      return;
+    }
     localStorage.setItem('user-data', JSON.stringify(data));
     navigate('/');
     setUserIsLogged(true);
