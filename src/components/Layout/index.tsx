@@ -25,7 +25,7 @@ const Layout = ({ onClickMenu }: IPropsDropdownMenu) => {
   const cartItem = (
     <li
       className={`cursor-pointer hover:text-primary-red-0 ease-in-out duration-300 relative text-center ${
-        countItem > 0 ? 'text-primary-green-2' : ''
+        countItem > 0 ? 'text-primary-green-0' : ''
       }`}
     >
       <Link to="cart">
@@ -77,6 +77,9 @@ const Layout = ({ onClickMenu }: IPropsDropdownMenu) => {
               <Link to="/promotions">Contato</Link>
             </li>
             {cartItem}
+            <li className="cursor-pointer  hover:text-primary-red-0 ease-in-out duration-300">
+              <Link to="/admin">Admin</Link>
+            </li>
             {userIsLogged ? (
               <li className="flex gap-4 items-center ">
                 <p className="cursor-pointer hover:text-primary-red-0 ease-in-out duration-300">

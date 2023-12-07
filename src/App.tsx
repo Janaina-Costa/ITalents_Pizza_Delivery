@@ -4,6 +4,8 @@ import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import { DropwDownMenu } from './components/DropdownModal';
 import Layout from './components/Layout';
+import { Admin } from './pages/Admin';
+import { AddProduct } from './pages/Admin/AddProduct';
 import { Cart } from './pages/Cart';
 import { Home } from './pages/Home';
 import { Login } from './pages/Login';
@@ -47,6 +49,23 @@ function App() {
             }
           />
           <Route path="/product/:id" element={<Product />} />
+          <Route
+            path="/admin"
+            element={
+              <ProtectedRoute>
+                <Admin />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/admin/add-product"
+            element={
+              <ProtectedRoute>
+                <AddProduct />
+              </ProtectedRoute>
+            }
+          />
         </Route>
         <Route path="*" element={<PageNotFound />} />
       </Routes>
