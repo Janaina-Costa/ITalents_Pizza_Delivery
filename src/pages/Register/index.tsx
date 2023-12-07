@@ -2,7 +2,7 @@ import { ChangeEvent, FormEvent, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { RegisterForm } from '../../components/Forms/RegisterForm';
-import { useApi } from '../../hooks/useApi';
+import { userService } from '../../services/userSevice';
 
 export const Register = () => {
   const [inputValue, setInputValue] = useState({
@@ -14,7 +14,7 @@ export const Register = () => {
     image: '',
   });
   const navigate = useNavigate();
-  const { register } = useApi();
+  const { register } = userService;
 
   const handleChangeValue = (e: ChangeEvent<HTMLInputElement>) => {
     setInputValue({ ...inputValue, [e.target.name]: e.target.value });

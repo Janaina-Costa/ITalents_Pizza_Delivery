@@ -6,9 +6,8 @@ import { useNavigate } from 'react-router-dom';
 
 import { IData } from '../contexts/AuthContext';
 import { api as apiServer } from '../services/api';
+import { userService } from '../services/userSevice';
 import { IUser } from '../types/User';
-
-import { useApi } from './useApi';
 
 const USER_DATA = JSON.parse(localStorage.getItem('user-data') || '{}');
 
@@ -17,12 +16,10 @@ export const useAuth = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [userData, setUserData] = useState<IUser | null>(null);
 
-  const api = useApi();
-
   const navigate = useNavigate();
 
   const signIn = async (email: string, password: string) => {
-    const data: IData = await api.signIn(email, password);
+    const data: IData = await userService.signIn(email, password);
     if (!data) {
       return;
     }
@@ -41,13 +38,14 @@ export const useAuth = () => {
   };
 
   const getUserById = async (idUser: string) => {
-    const data = await api.getUserById(idUser);
+    const data = await userService.getUserById(idUser);
     setUserData(data);
   };
 
   useEffect(() => {
     if (USER_DATA) {
       apiServer.defaults.headers.Authorization = `Bearer ${USER_DATA.token}`;
+      getUserById(USER_DATA.id);
       setUserIsLogged(true);
     }
     setLoading(false);
