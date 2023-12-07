@@ -11,7 +11,7 @@ export const Register = () => {
     password: '',
     confirmPassword: '',
     phone: '',
-    photoUrl: '',
+    image: '',
   });
   const navigate = useNavigate();
   const { register } = useApi();
@@ -22,13 +22,7 @@ export const Register = () => {
 
   const handleSubmitRegister = async (e: FormEvent) => {
     e.preventDefault();
-    const response = await register(
-      inputValue.name,
-      inputValue.email,
-      inputValue.password,
-      inputValue.phone,
-      inputValue.photoUrl,
-    );
+    const response = await register(inputValue);
     if (response) {
       alert('Cadastro realizado com sucesso!');
       navigate('/login');
@@ -43,7 +37,7 @@ export const Register = () => {
           email: inputValue.email,
           password: inputValue.password,
           phone: inputValue.phone,
-          photoUrl: inputValue.photoUrl,
+          image: inputValue.image,
         }}
         onChangeInputName={handleChangeValue}
         onChangeInputEmail={handleChangeValue}

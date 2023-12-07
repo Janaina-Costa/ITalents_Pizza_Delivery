@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-use-before-define */
 /* eslint-disable consistent-return */
 import { useState, useEffect } from 'react';
@@ -19,14 +20,6 @@ export const useAuth = () => {
   const api = useApi();
 
   const navigate = useNavigate();
-  useEffect(() => {
-    if (USER_DATA) {
-      apiServer.defaults.headers.Authorization = `Bearer ${USER_DATA.token}`;
-      getUserById(USER_DATA.id);
-      setUserIsLogged(true);
-    }
-    setLoading(false);
-  }, []);
 
   const signIn = async (email: string, password: string) => {
     const data: IData = await api.signIn(email, password);
@@ -35,6 +28,7 @@ export const useAuth = () => {
     }
     localStorage.setItem('user-data', JSON.stringify(data));
     apiServer.defaults.headers.Authorization = `Bearer ${data.token}`;
+    getUserById(data.id);
     navigate('/');
     setUserIsLogged(true);
     return data;
@@ -50,6 +44,14 @@ export const useAuth = () => {
     const data = await api.getUserById(idUser);
     setUserData(data);
   };
+
+  useEffect(() => {
+    if (USER_DATA) {
+      apiServer.defaults.headers.Authorization = `Bearer ${USER_DATA.token}`;
+      setUserIsLogged(true);
+    }
+    setLoading(false);
+  }, []);
 
   return { userIsLogged, loading, userData, signIn, signOut };
 };

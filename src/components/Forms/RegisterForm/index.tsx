@@ -11,7 +11,7 @@ interface IProps {
     email: string;
     password: string;
     phone: string;
-    photoUrl: string;
+    image: string;
   };
   onChangeInputName: (e: ChangeEvent<HTMLInputElement>) => void;
   onChangeInputEmail: (e: ChangeEvent<HTMLInputElement>) => void;
@@ -106,8 +106,8 @@ export const RegisterForm = ({
           type="text"
           className="bg-transparent py-5 pl-4 w-full max-w-full rounded outline-none"
           onChange={handleChangeInputPhotoUrl}
-          value={value.photoUrl}
-          name="photoUrl"
+          value={value.image}
+          name="image"
         />
         <Button
           isSelected
