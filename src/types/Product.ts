@@ -1,8 +1,11 @@
+import { ProductCategoryEnum, ProductSizesEnum } from './enum/Product';
+
 export interface IProduct {
+  _id?: string;
   name: string;
   description: string;
-  category: string;
+  category: ProductCategoryEnum;
   image: string;
-  size: string;
+  size?: '' | ProductSizesEnum;
   price: number;
 }

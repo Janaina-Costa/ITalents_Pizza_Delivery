@@ -18,9 +18,11 @@ export const TRow = ({
 }: IProps) => {
   return (
     <tr className="p-8 border-b border-b-stone-500">
-      <td className=" px-6 py-4"> {productId}</td>
+      <td className=" px-6 py-4 ">
+        <p className=" truncate w-full max-md:w-9 ">{productId}</p>{' '}
+      </td>
       <td className=" px-6 py-4">
-        <Image src={productImage} />
+        <Image className="w-20 max-w-full" src={productImage} />
       </td>
       <td className=" px-6 py-4">{productName}</td>
       <td className=" px-6 py-4">R${productPrice}</td>

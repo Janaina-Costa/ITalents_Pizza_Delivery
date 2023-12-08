@@ -8,7 +8,7 @@ interface IProps {
 
 export const Table = ({ children }: IProps) => {
   return (
-    <table className="w-full">
+    <table className="w-full table-auto ">
       <THead />
       <tbody className="bg-black">{children}</tbody>
     </table>

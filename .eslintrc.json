@@ -56,6 +56,8 @@
       "react/function-component-definition":"off",
       "import/prefer-default-export":"off",
       "arrow-body-style":"off",
-      "react/require-default-props":"off"
+      "react/require-default-props":"off",
+      "class-methods-use-this":"off",
+      "consistent-return":"off"
     }
 }
