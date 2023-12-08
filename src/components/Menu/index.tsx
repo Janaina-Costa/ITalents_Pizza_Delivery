@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
 /* eslint-disable no-useless-return */
@@ -5,7 +6,9 @@
 /* eslint-disable consistent-return */
 import { useEffect, useState } from 'react';
 
-import { itemsData } from '../../data/itemsData';
+import { productService } from '../../services/productService';
+import { ProductCategoryEnum } from '../../types/enum/Product';
+import { IProduct } from '../../types/Product';
 import { Button } from '../Button';
 
 import { ItemMenuCard } from './ItemMenuCard';
@@ -19,27 +22,49 @@ interface IPropsBtnMenu {
 
 const dataBtn = [
   {
-    id: 'item-pizza-trad',
+    id: ProductCategoryEnum.TRADICIONAL,
     name: 'Pizzas Tradicionais',
     value: 'traditional',
     isSelectedButton: true,
   },
   {
-    id: 'item-pizza-sweet',
+    id: ProductCategoryEnum.SWEET,
     name: 'Pizzas Doces',
     value: 'sweet',
     isSelectedButton: false,
   },
-  { id: 'btn3', name: 'Bebidas', value: 'drinks', isSelectedButton: false },
+  {
+    id: ProductCategoryEnum.DRINK,
+    name: 'Bebidas',
+    value: 'drinks',
+    isSelectedButton: false,
+  },
 ];
 
 export const Menu = () => {
   const [listButtonsMenu, setListButtonsMenu] =
     useState<IPropsBtnMenu[]>(dataBtn);
-  const [listProductItems, setListProductItems] = useState(itemsData);
-  const [idSelected, setIdSelected] = useState('item-pizza-trad');
+  const [listProductItems, setListProductItems] = useState<
+    Omit<IProduct, 'size'>[]
+  >([]);
+  const [idSelected, setIdSelected] = useState(ProductCategoryEnum.TRADICIONAL);
+  const { getAllProducts } = productService;
 
-  const handleButtonClick = (id: string) => {
+  const getProduct = async () => {
+    const data = await getAllProducts();
+    if (!data) {
+      return;
+    }
+    console.log(data);
+
+    setListProductItems(data);
+  };
+
+  useEffect(() => {
+    getProduct();
+  }, []);
+
+  const handleButtonClick = (id: any) => {
     setListButtonsMenu((prev) => {
       return prev.map((item) =>
         item.id === id
@@ -104,14 +129,18 @@ export const Menu = () => {
      "
       >
         {listProductItems.map((item) =>
-          idSelected === item.idProduct ? (
+          idSelected === item.category ? (
             <ItemMenuCard
-              key={item.idProduct}
+              key={item._id}
               idProduct={idSelected}
-              data={item.items.map((dataItems) => {
-                const data = { ...dataItems };
-                return data;
-              })}
+              data={{
+                id: item._id,
+                name: item.name,
+                price: item.price,
+                src: item.image,
+                alt: item.name,
+                description: item.description,
+              }}
               value={0}
             />
           ) : (
