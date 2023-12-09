@@ -86,7 +86,7 @@ const Layout = ({ onClickMenu }: IPropsDropdownMenu) => {
                   Olá, {userData?.name}!
                 </p>
                 <Image
-                  className="rounded-full w-20 border cursor-pointer"
+                  className="rounded-full w-12 border cursor-pointer"
                   src={userData?.image}
                   alt=""
                 />

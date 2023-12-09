@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-return */
 /* eslint-disable consistent-return */
 
 import { ChangeEvent, useEffect, useState } from 'react';
@@ -5,28 +6,19 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 import { CountButton } from '../../components/CountButton';
 import { ProductDetail } from '../../components/Product';
-import { itemsData } from '../../data/itemsData';
+import { productService } from '../../services/productService';
+import { IProduct } from '../../types/Product';
 
 export const Product = () => {
   const { id } = useParams();
 
   const [count, setCount] = useState<number>(1);
   const [total, setTotal] = useState<number>();
+  const [product, setProduct] = useState<IProduct>();
+  const { getProductById } = productService;
 
   const navigate = useNavigate();
 
-  const setData = (idProduct: string) => {
-    const getData = itemsData.map((item) =>
-      item.items.find((c) => c.id === idProduct),
-    );
-    const data = getData.map((f) => f);
-
-    if (data === undefined) {
-      return;
-    }
-
-    return data[0] || data[1];
-  };
   const redirectTo = () => {
     navigate('/');
   };
@@ -46,22 +38,35 @@ export const Product = () => {
     setCount(Number(e.target.value));
   };
   // TODO quando estiver com zero perguntar se quer remover o item da sacola
-
   useEffect(() => {
     if (!id) {
       return;
     }
-    const price: number = Number(setData(id!)?.price.toFixed(2));
-    setTotal(count * price);
-  }, [count, id]);
+    const setData = async () => {
+      const response = await getProductById(id);
+      if (!response) {
+        return;
+      }
+      setProduct(response);
+    };
+    setData();
+  }, [id, getProductById]);
+
+  useEffect(() => {
+    if (!product) {
+      return;
+    }
+    const totalValue = product.price * count;
+    setTotal(totalValue);
+  }, [count, product]);
 
   return (
     <div className="bg-black max-w-[40rem] m-auto mt-16 p-8 flex flex-col items-center max-md:mt-0 max-md:h-screen overflow-hidden">
       <ProductDetail
-        alt={setData(id!)?.alt}
-        src={setData(id!)?.src}
-        description={setData(id!)?.description}
-        title={setData(id!)?.title}
+        alt={product?.name}
+        src={product?.image}
+        description={product?.description}
+        title={product?.name}
         total={total}
         onClickToNavigate={redirectTo}
       >

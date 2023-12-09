@@ -33,6 +33,7 @@ export default {
       },
       screens:{
         'sm':'560px',
+        'md':'920px',
       },
       animation:{
         fadeDown:'fadeDown ease-in-out 5s linear'

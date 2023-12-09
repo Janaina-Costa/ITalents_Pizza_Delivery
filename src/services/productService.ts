@@ -35,6 +35,15 @@ class ProductService {
       console.log(err);
     }
   }
+
+  public async getProductById(id: string) {
+    try {
+      const response = await api.get(`/product/${id}`);
+      return response.data;
+    } catch (err) {
+      console.log(err);
+    }
+  }
 }
 
 export const productService = new ProductService();

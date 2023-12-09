@@ -48,7 +48,9 @@ export const ProductDetail = ({
               className="cursor-pointer hover:brightness-100"
             />
           </div>
-          <Image src={src} alt={alt} className="absolute left-0" />
+          <div className="relative w-full  flex items-center justify-center">
+            <Image src={src} alt={alt} className="left-8 w-[28rem]" />
+          </div>
         </div>
         <HeartStraight
           className="mt-3 cursor-pointer"
