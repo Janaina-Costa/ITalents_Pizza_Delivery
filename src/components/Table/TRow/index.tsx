@@ -18,7 +18,7 @@ export const TRow = ({
 }: IProps) => {
   return (
     <tr className="p-8 border-b border-b-stone-500">
-      <td className=" px-6 py-4 ">
+      <td className=" px-6 py-4 max-sm:hidden ">
         <p className=" truncate w-full max-md:w-9 ">{productId}</p>{' '}
       </td>
       <td className=" px-6 py-4">
@@ -27,7 +27,7 @@ export const TRow = ({
       <td className=" px-6 py-4">{productName}</td>
       <td className=" px-6 py-4">R${productPrice}</td>
       <td className=" px-6 py-4">
-        <div className="flex justify-start items-center gap-7">
+        <div className="flex justify-start items-center gap-7 max-md:flex-col ">
           <button type="button">
             <Pencil className="text-blue-800" size={24} />
           </button>

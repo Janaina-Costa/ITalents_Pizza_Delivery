@@ -6,7 +6,7 @@ export const THead = () => {
           "
     >
       <tr className="text-left  ">
-        <th className="px-6 py-3">ID</th>
+        <th className="px-6 py-3 max-sm:hidden">ID</th>
         <th className="px-6 py-3">Imagem</th>
         <th className="px-6 py-3">Nome</th>
         <th className="px-6 py-3">Preço</th>
