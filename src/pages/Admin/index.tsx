@@ -23,6 +23,14 @@ export const Admin = () => {
     setProducts(data);
   };
 
+  const handleRemoveProduct = async (id: string) => {
+    const resp = window.confirm('Deseja realmente remover este produto?');
+    if (resp) {
+      await productService.deleteProduct(id);
+      getProducts();
+    }
+  };
+
   useEffect(() => {
     getProducts();
   }, []);
@@ -48,6 +56,7 @@ export const Admin = () => {
               productImage={product.image}
               productName={product.name}
               productPrice={product.price}
+              onRemoveProduct={handleRemoveProduct}
             />
           ))}
         </Table>

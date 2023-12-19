@@ -44,6 +44,40 @@ class ProductService {
       console.log(err);
     }
   }
+
+  public async updateProduct({
+    _id,
+    category,
+    description,
+    image,
+    name,
+    price,
+    size,
+  }: IProduct) {
+    try {
+      const response = await api.put(`/product/update/${_id}`, {
+        name,
+        description,
+        category,
+        image,
+        price,
+        size,
+      });
+
+      return response.data;
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  public async deleteProduct(id: string) {
+    try {
+      const response = await api.delete(`product/remove/${id}`);
+      return response.data;
+    } catch (err) {
+      console.log(err);
+    }
+  }
 }
 
 export const productService = new ProductService();

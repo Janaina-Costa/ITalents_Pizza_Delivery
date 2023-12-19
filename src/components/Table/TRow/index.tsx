@@ -8,6 +8,7 @@ interface IProps {
   productImage: string;
   productName: string;
   productPrice: number;
+  onRemoveProduct: (id: string) => void;
 }
 
 export const TRow = ({
@@ -15,7 +16,11 @@ export const TRow = ({
   productImage,
   productName,
   productPrice,
+  onRemoveProduct,
 }: IProps) => {
+  const handleClick = (id: string) => {
+    onRemoveProduct(id);
+  };
   return (
     <tr className="p-8 border-b border-b-stone-500">
       <td className=" px-6 py-4 max-sm:hidden ">
@@ -32,7 +37,11 @@ export const TRow = ({
             <Pencil className="text-blue-800" size={24} />
           </button>
           <button type="button">
-            <Trash className="text-primary-red-1" size={24} />
+            <Trash
+              onClick={() => handleClick(productId)}
+              className="text-primary-red-1"
+              size={24}
+            />
           </button>
         </div>
       </td>
