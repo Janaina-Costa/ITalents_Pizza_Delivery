@@ -43,7 +43,6 @@ export const Product = () => {
       {
         ...product,
         quantity,
-        price: total,
       },
     ];
     const cartStorage = JSON.parse(localStorage.getItem('cart') || '[]');

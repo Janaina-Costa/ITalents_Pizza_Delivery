@@ -3,6 +3,7 @@
 import { Trash } from '@phosphor-icons/react';
 import { useEffect, useState } from 'react';
 
+import { Button } from '../../components/Button';
 import { Divider } from '../../components/Divider';
 import { Image } from '../../components/Image';
 import Input from '../../components/Input';
@@ -11,11 +12,22 @@ import { IProduct } from '../../types/Product';
 
 export const Cart = () => {
   const [productsCart, setProductsCart] = useState<IProduct[]>([]);
+  const [totalProduct, setTotalProduct] = useState(0);
+  const [purchaseTotal, setPurchaseTotal] = useState(0);
+  const deliveryTax = 5;
 
   useEffect(() => {
     const storageCart = JSON.parse(localStorage.getItem('cart') || '[]');
     setProductsCart(storageCart);
   }, []);
+
+  useEffect(() => {
+    const totalCart = productsCart.reduce((acc, product) => {
+      return acc + product.price * product.quantity!;
+    }, 0);
+    setTotalProduct(totalCart);
+    setPurchaseTotal(totalCart + deliveryTax);
+  }, [productsCart]);
   return (
     <main className="relative grid grid-cols-2 gap-4 max-w-7xl max-md:grid-cols-1 mx-auto mt-28 bg-black ">
       <div className="p-4 ">
@@ -90,17 +102,24 @@ export const Cart = () => {
             </div>
           </div>
         ))}
-        <Divider className="mb-8 mt-8" />
+        <Divider className="" />
         <div className=" flex flex-col  gap-3">
           <div className="flex justify-between">
-            Total <span>40,00</span>
+            Total <span>R$ {totalProduct}</span>
           </div>
           <div className="flex justify-between">
             Taxa de entrega <span>5,00</span>
           </div>
           <div className="flex justify-between">
-            Total+ entrega <span>45,00</span>
+            Total+ entrega <span>R$ {purchaseTotal}</span>
           </div>
+          <Button
+            type="button"
+            className="w-full max-w-full rounded-lg"
+            isSelected
+          >
+            Enviar Pedido
+          </Button>
         </div>
       </div>
     </main>
