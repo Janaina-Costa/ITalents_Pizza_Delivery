@@ -6,6 +6,7 @@ import { DropwDownMenu } from './components/DropdownModal';
 import Layout from './components/Layout';
 import { Admin } from './pages/Admin';
 import { AddProduct } from './pages/Admin/AddProduct';
+import { UpdateProduct } from './pages/Admin/UpdateProduct';
 import { Cart } from './pages/Cart';
 import { Home } from './pages/Home';
 import { Login } from './pages/Login';
@@ -63,6 +64,14 @@ function App() {
             element={
               <ProtectedRoute>
                 <AddProduct />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/update-product/:id"
+            element={
+              <ProtectedRoute>
+                <UpdateProduct />
               </ProtectedRoute>
             }
           />

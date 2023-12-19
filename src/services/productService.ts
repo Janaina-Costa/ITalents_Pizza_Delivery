@@ -45,17 +45,12 @@ class ProductService {
     }
   }
 
-  public async updateProduct({
-    _id,
-    category,
-    description,
-    image,
-    name,
-    price,
-    size,
-  }: IProduct) {
+  public async updateProduct(
+    id: string,
+    { category, description, image, name, price, size }: IProduct,
+  ) {
     try {
-      const response = await api.put(`/product/update/${_id}`, {
+      const response = await api.put(`/product/update/${id}`, {
         name,
         description,
         category,

@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
 import { Pencil, Trash } from '@phosphor-icons/react';
+import { Link } from 'react-router-dom';
 
 import { Image } from '../../Image';
 
@@ -33,9 +34,10 @@ export const TRow = ({
       <td className=" px-6 py-4">R${productPrice}</td>
       <td className=" px-6 py-4">
         <div className="flex justify-start items-center gap-7 max-md:flex-col ">
-          <button type="button">
+          <Link to={`/admin/update-product/${productId}`}>
             <Pencil className="text-blue-800" size={24} />
-          </button>
+          </Link>
+
           <button type="button">
             <Trash
               onClick={() => handleClick(productId)}
