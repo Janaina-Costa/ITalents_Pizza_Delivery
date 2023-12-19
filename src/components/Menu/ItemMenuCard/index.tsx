@@ -5,6 +5,7 @@ import { Tote } from '@phosphor-icons/react';
 import { Link } from 'react-router-dom';
 
 import { Image } from '../../Image';
+import { QuantityButton } from '../../QuantityButton';
 
 interface IProps {
   idProduct: string;
@@ -41,20 +42,14 @@ export const ItemMenuCard = ({ data, value, idProduct }: IProps) => {
           </p>
         </div>
       </Link>
-
-      <div className="flex gap-4 items-center mt-2">
-        <div className="flex gap-2 bg-gray-800 px-2 rounded-xl">
-          <button type="button">+</button>
-          <span>{value}</span>
-          <button type="button">-</button>
-        </div>
+      <QuantityButton value={value}>
         <button
           type="button"
           className="bg-gradient-to-r from-primary-green-1 from-0% to-primary-green-3 to-100% rounded-2xl px-2"
         >
           <Tote size={24} color="#ffffff" weight="regular" />
         </button>
-      </div>
+      </QuantityButton>
     </div>
   );
 };

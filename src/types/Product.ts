@@ -8,4 +8,5 @@ export interface IProduct {
   image: string;
   size?: '' | ProductSizesEnum;
   price: number;
+  quantity?: number;
 }
