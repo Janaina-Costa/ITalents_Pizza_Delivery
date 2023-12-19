@@ -12,7 +12,7 @@ import { IProduct } from '../../types/Product';
 export const Product = () => {
   const { id } = useParams();
 
-  const [count, setCount] = useState<number>(1);
+  const [quantity, setQuantity] = useState<number>(1);
   const [total, setTotal] = useState<number>();
   const [product, setProduct] = useState<IProduct>();
   const { getProductById } = productService;
@@ -24,18 +24,33 @@ export const Product = () => {
   };
 
   const handleCountSum = () => {
-    setCount((prev) => prev + 1);
+    setQuantity((prev) => prev + 1);
   };
 
   const handleCountSub = () => {
-    if (count <= 0) {
+    if (quantity <= 0) {
       return;
     }
-    setCount((prev) => prev - 1);
+    setQuantity((prev) => prev - 1);
   };
 
   const handleChangeInputCount = (e: ChangeEvent<HTMLInputElement>) => {
-    setCount(Number(e.target.value));
+    setQuantity(Number(e.target.value));
+  };
+
+  const addToCart = () => {
+    const cart = [
+      {
+        ...product,
+        quantity,
+        price: total,
+      },
+    ];
+    const cartStorage = JSON.parse(localStorage.getItem('cart') || '[]');
+    if (cartStorage) {
+      cart.push(...cartStorage);
+    }
+    localStorage.setItem('cart', JSON.stringify(cart));
   };
   // TODO quando estiver com zero perguntar se quer remover o item da sacola
   useEffect(() => {
@@ -56,12 +71,12 @@ export const Product = () => {
     if (!product) {
       return;
     }
-    const totalValue = product.price * count;
+    const totalValue = product.price * quantity;
     setTotal(totalValue);
-  }, [count, product]);
+  }, [quantity, product]);
 
   return (
-    <div className="bg-black max-w-[40rem] m-auto mt-16 p-8 flex flex-col items-center max-md:mt-0 max-md:h-screen overflow-hidden">
+    <div className="bg-black max-w-[40rem] m-auto mt-16 p-8 flex flex-col items-center max-md:mt-0 max-md:h-screen overflow-hidden mt-28">
       <ProductDetail
         alt={product?.name}
         src={product?.image}
@@ -69,9 +84,10 @@ export const Product = () => {
         title={product?.name}
         total={total}
         onClickToNavigate={redirectTo}
+        onAddToCart={addToCart}
       >
         <CountButton
-          counter={count}
+          counter={quantity}
           onClickMinus={handleCountSub}
           onClickPlus={handleCountSum}
           onChangeInput={handleChangeInputCount}

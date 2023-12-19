@@ -14,6 +14,7 @@ interface IProps {
   title: string | undefined;
   description: string | undefined;
   total: number | undefined;
+  onAddToCart: () => void;
 }
 
 export const ProductDetail = ({
@@ -24,6 +25,7 @@ export const ProductDetail = ({
   description,
   total,
   onClickToNavigate,
+  onAddToCart,
 }: IProps) => {
   const [isFavorite, setIsFavorite] = useState<boolean>(false);
 
@@ -33,6 +35,10 @@ export const ProductDetail = ({
 
   const handleNavigate = () => {
     onClickToNavigate();
+  };
+
+  const handleAddToCart = () => {
+    onAddToCart();
   };
 
   return (
@@ -84,6 +90,7 @@ export const ProductDetail = ({
         className="rounded-md w-full mt-[3.25rem]"
         isSelected
         type="button"
+        onClick={handleAddToCart}
       >
         Adicionar à Sacola
       </Button>
