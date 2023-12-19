@@ -69,7 +69,7 @@ export const UpdateProduct = () => {
   }, []);
 
   return (
-    <section className="max-w-screen-xl mt-24 m-auto">
+    <section className="max-w-screen-xl mt-48 m-auto">
       <div>
         <h1 className="text-2xl">Edição de Produto</h1>
       </div>

@@ -36,7 +36,7 @@ export const Admin = () => {
   }, []);
 
   return (
-    <section className="flex flex-col w-full p-8 mt-24">
+    <section className="flex flex-col w-full p-8 mt-48">
       <div className="flex justify-end w-full">
         <Button
           isSelected

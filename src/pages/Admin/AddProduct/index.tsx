@@ -63,7 +63,7 @@ export const AddProduct = () => {
   }, []);
 
   return (
-    <section className="max-w-screen-xl mt-24 m-auto">
+    <section className="max-w-screen-xl mt-48 m-auto">
       <div>
         <h1 className="text-2xl">Cadastro de Produtos</h1>
       </div>

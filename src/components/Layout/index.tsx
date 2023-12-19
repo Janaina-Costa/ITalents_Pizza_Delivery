@@ -43,12 +43,14 @@ const Layout = ({ onClickMenu }: IPropsDropdownMenu) => {
 
   return (
     <>
-      <header className="z-50 w-full ">
-        <nav className="flex items-center max-w-7xl mx-auto  py-3 px-2 bg-transparent">
+      <header className="z-50 w-full fixed top-0 flex justify-center  ">
+        <nav
+          className="flex items-center max-w-7xl
+                {' '}mx-auto  py-3 px-2 bg-black w-full"
+        >
           <div className="flex flex-grow items-center ">
             <div className="flex flex-col relative">
               <Link to="/">
-                {' '}
                 <Logo />
               </Link>
             </div>
