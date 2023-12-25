@@ -23,6 +23,7 @@ export const useAuth = () => {
     if (!data) {
       return;
     }
+
     localStorage.setItem('user-data', JSON.stringify(data));
     apiServer.defaults.headers.Authorization = `Bearer ${data.token}`;
     getUserById(data.id);
@@ -39,6 +40,11 @@ export const useAuth = () => {
 
   const getUserById = async (idUser: string) => {
     const data = await userService.getUserById(idUser);
+    if (!data) {
+      localStorage.clear();
+      navigate('/login');
+    }
+
     setUserData(data);
   };
 
