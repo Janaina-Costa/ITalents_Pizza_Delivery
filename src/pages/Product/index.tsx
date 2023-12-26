@@ -10,7 +10,7 @@ import { LoadingSpinner } from '../../components/Spinner';
 import { decrement, increment } from '../../features/counter/counterSlice';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { productService } from '../../services/productService';
-import { IProduct } from '../../types/Product';
+import { IProduct } from '../../types/interface/Product';
 
 export const Product = () => {
   const { id } = useParams();

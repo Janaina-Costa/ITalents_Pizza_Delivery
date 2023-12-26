@@ -8,7 +8,7 @@ import { useEffect, useState } from 'react';
 
 import { productService } from '../../services/productService';
 import { ProductCategoryEnum } from '../../types/enum/Product';
-import { IProduct } from '../../types/Product';
+import { IProduct } from '../../types/interface/Product';
 import { Button } from '../Button';
 
 import { ItemMenuCard } from './ItemMenuCard';
@@ -100,12 +100,10 @@ export const Menu = () => {
 
   return (
     <section className="w-full">
-      <section className="mt-8 mb-8 flex flex-col flex-wrap">
-        <h1 className="text-5xl font-semibold mb-8 px-10 max-md:text-3xl">
-          Menu
-        </h1>
+      <section className="mt-8 mb-8 flex flex-col flex-wrap pl-4">
+        <h1 className="text-5xl font-semibold mb-8  max-md:text-3xl">Menu</h1>
 
-        <div className="flex justify-start gap-4 px-8 w-full overflow-hidden max-sm:flex-col">
+        <div className="flex justify-start gap-4 w-full overflow-hidden max-sm:flex-col ">
           {listButtonsMenu.map((btn) => (
             <Button
               key={btn.value}
@@ -123,9 +121,10 @@ export const Menu = () => {
       </section>
 
       <section
-        className="grid grid-cols-4 w-full justify-items-center max-sm:grid-cols-1
+        className="grid grid-cols-4 w-full  max-sm:grid-cols-1 pl-4
       max-md:grid-cols-2
       max-lg:grid-cols-3
+      max-sm:justify-items-center
      "
       >
         {listProductItems.map((item) =>
@@ -141,7 +140,6 @@ export const Menu = () => {
                 alt: item.name,
                 description: item.description,
               }}
-              value={0}
             />
           ) : (
             ''

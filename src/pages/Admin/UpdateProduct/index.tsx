@@ -10,7 +10,7 @@ import {
   ProductCategoryEnum,
   ProductSizesEnum,
 } from '../../../types/enum/Product';
-import { IProduct } from '../../../types/Product';
+import { IProduct } from '../../../types/interface/Product';
 
 export const UpdateProduct = () => {
   const { id } = useParams();

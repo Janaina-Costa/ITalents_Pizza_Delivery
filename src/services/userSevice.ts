@@ -1,6 +1,6 @@
 /* eslint-disable class-methods-use-this */
 /* eslint-disable consistent-return */
-import { IAdressUser, IUser } from '../types/User';
+import { IAdressUser, IUser } from '../types/interface/User';
 
 import { api } from './api';
 

@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { IData } from '../contexts/AuthContext';
 import { api as apiServer } from '../services/api';
 import { userService } from '../services/userSevice';
-import { IUser } from '../types/User';
+import { IUser } from '../types/interface/User';
 
 export const USER_DATA = JSON.parse(localStorage.getItem('user-data') || '{}');
 

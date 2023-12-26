@@ -24,6 +24,8 @@ export default {
       },
       backgroundImage: {
         'back-banner':'url("/src/assets/backbanner.png")',
+        'back-banner-2':'url("/src/assets/forno.png")',
+
         'bg-main-menu':'url("/src/assets/backmain.png")',
         'bg-not-found':'url("/src/assets/blackempty.png")',
 

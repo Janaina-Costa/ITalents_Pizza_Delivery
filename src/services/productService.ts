@@ -1,4 +1,4 @@
-import { IProduct } from '../types/Product';
+import { IProduct } from '../types/interface/Product';
 
 import { api } from './api';
 

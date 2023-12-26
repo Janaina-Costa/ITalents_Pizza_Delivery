@@ -129,6 +129,33 @@ const Layout = ({ onClickMenu }: IPropsDropdownMenu) => {
           </ul>
           <ul className="md:hidden flex items-center gap-8">
             {cartItem}
+            {userIsLogged ? (
+              <>
+                <li className="flex gap-4 items-center ">
+                  <p className="cursor-pointer hover:text-primary-red-0 ease-in-out duration-300">
+                    Olá, {userData?.name}!
+                  </p>
+                </li>
+                <li>
+                  <Image
+                    className="rounded-full w-12 border cursor-pointer"
+                    src={userData?.image}
+                    alt={`imagem de ${userData?.name}`}
+                  />
+                </li>
+              </>
+            ) : (
+              <li className="cursor-pointer  hover:text-primary-red-0 ease-in-out duration-300">
+                <Button
+                  className=""
+                  type="button"
+                  isSelected
+                  onClick={() => navigate('/register')}
+                >
+                  Cadastre-se
+                </Button>
+              </li>
+            )}
             <li>
               <MenuIcon onClick={handleClickDropDownMenu} />{' '}
             </li>

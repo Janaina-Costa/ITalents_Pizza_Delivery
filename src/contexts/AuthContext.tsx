@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-no-constructed-context-values */
 import { createContext } from 'react';
 
-import { IUser } from '../types/User';
+import { IUser } from '../types/interface/User';
 
 export interface IData {
   email: string;

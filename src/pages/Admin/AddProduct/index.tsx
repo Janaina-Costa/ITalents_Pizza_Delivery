@@ -9,7 +9,7 @@ import {
   ProductCategoryEnum,
   ProductSizesEnum,
 } from '../../../types/enum/Product';
-import { IProduct } from '../../../types/Product';
+import { IProduct } from '../../../types/interface/Product';
 
 export const AddProduct = () => {
   const inputRef = useRef<HTMLInputElement>(null);

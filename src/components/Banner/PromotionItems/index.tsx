@@ -1,4 +1,4 @@
-import { IPropsItems } from '../../../types/interface/Product';
+import { IPropsItems } from '../../../types/interface/ProductPromotions';
 import { Button } from '../../Button';
 import { Image } from '../../Image';
 

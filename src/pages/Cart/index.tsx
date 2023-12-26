@@ -18,8 +18,8 @@ import { USER_DATA } from '../../hooks/useAuth';
 import { cartService } from '../../services/cartService';
 import { orderService } from '../../services/orderService';
 import { userService } from '../../services/userSevice';
-import { IProduct } from '../../types/Product';
-import { IAdressUser } from '../../types/User';
+import { IProduct } from '../../types/interface/Product';
+import { IAdressUser } from '../../types/interface/User';
 
 export const ADDRESS_DATA = JSON.parse(localStorage.getItem('address') || '{}');
 export const CART_DATA = JSON.parse(localStorage.getItem('cart') || '[]');
@@ -29,6 +29,7 @@ export const Cart = () => {
   const { createCart } = cartService;
   const { createOrder } = orderService;
   const navigate = useNavigate();
+
   const { userData } = useContext(AuthContext);
   const [productsCart, setProductsCart] = useState<IProduct[]>([]);
   const [totalProduct, setTotalProduct] = useState(0);
@@ -179,10 +180,10 @@ export const Cart = () => {
           </div>
         )}
         <Divider />
-        <div className="flex items-center  gap-2">
+        <div className="flex items-center  gap-2 hover:text-primary-green-1 ease-in-out duration-300">
           <MapPinLine size={28} />
           <h1
-            className="text-1xl underline cursor-pointer"
+            className="text-1xl underline cursor-pointer "
             onClick={() => setShowFormAddress((prev) => !prev)}
           >
             Adicionar novo endereço de entrega

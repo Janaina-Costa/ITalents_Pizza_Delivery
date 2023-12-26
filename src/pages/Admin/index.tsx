@@ -8,7 +8,7 @@ import { Button } from '../../components/Button';
 import { Table } from '../../components/Table';
 import { TRow } from '../../components/Table/TRow';
 import { productService } from '../../services/productService';
-import { IProduct } from '../../types/Product';
+import { IProduct } from '../../types/interface/Product';
 
 export const Admin = () => {
   const [products, setProducts] = useState<IProduct[]>([]);
