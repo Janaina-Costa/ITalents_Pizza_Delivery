@@ -6,6 +6,7 @@
 import { MapPinLine, Trash } from '@phosphor-icons/react';
 import axios from 'axios';
 import { ChangeEvent, useContext, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { Button } from '../../components/Button';
 import { Divider } from '../../components/Divider';
@@ -14,6 +15,8 @@ import Input from '../../components/Input';
 import { QuantityButton } from '../../components/QuantityButton';
 import { AuthContext } from '../../contexts/AuthContext';
 import { USER_DATA } from '../../hooks/useAuth';
+import { cartService } from '../../services/cartService';
+import { orderService } from '../../services/orderService';
 import { userService } from '../../services/userSevice';
 import { IProduct } from '../../types/Product';
 import { IAdressUser } from '../../types/User';
@@ -22,6 +25,9 @@ export const ADDRESS_DATA = JSON.parse(localStorage.getItem('address') || '{}');
 
 export const Cart = () => {
   const { createAddress } = userService;
+  const { createCart } = cartService;
+  const { createOrder } = orderService;
+  const navigate = useNavigate();
   const { userData } = useContext(AuthContext);
   const [productsCart, setProductsCart] = useState<IProduct[]>([]);
   const [totalProduct, setTotalProduct] = useState(0);
@@ -87,15 +93,47 @@ export const Cart = () => {
     }
   };
 
-  const sendOrder = () => {
-    const order = productsCart.map((product) => {
+  const sendOrder = async () => {
+    const cart = productsCart.map((product) => {
       return {
         id: product._id,
         quantity: product.quantity,
       };
     });
+    const cartInfo = {
+      products: cart,
+      totalPrice: purchaseTotal,
+      deliveryValue: deliveryTax,
+    };
 
-    console.log(order);
+    const response = await createCart(cartInfo);
+
+    if (response) {
+      const order = {
+        products: response.products,
+        totalPrice: response.totalPrice,
+        deliveryValue: response.deliveryValue,
+        orderCompleted: true,
+      };
+
+      const responseOrder = await createOrder(order);
+      if (responseOrder) {
+        alert('Order created with success');
+        localStorage.removeItem('cart');
+        navigate('/');
+      }
+    }
+  };
+
+  const removeProduct = (productId: string) => {
+    const productStorage = JSON.parse(localStorage.getItem('cart') || '[]');
+    if (productStorage.length > 0) {
+      const filterProduct = productStorage.filter(
+        (product: IProduct) => product._id !== productId,
+      );
+      localStorage.setItem('cart', JSON.stringify(filterProduct));
+      setProductsCart(filterProduct);
+    }
   };
 
   useEffect(() => {
@@ -237,7 +275,10 @@ export const Cart = () => {
             </div>
             <div className="flex items-center gap-8">
               <QuantityButton value={product.quantity!}>
-                <Trash />
+                <Trash
+                  onClick={() => removeProduct(product._id!)}
+                  className="cursor-pointer"
+                />
               </QuantityButton>
             </div>
           </div>
