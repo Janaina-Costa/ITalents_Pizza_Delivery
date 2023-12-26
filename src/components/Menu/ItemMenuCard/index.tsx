@@ -1,15 +1,13 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable jsx-a11y/control-has-associated-label */
 
-import { Tote } from '@phosphor-icons/react';
 import { Link } from 'react-router-dom';
 
 import { Image } from '../../Image';
-import { QuantityButton } from '../../QuantityButton';
 
 interface IProps {
   idProduct: string;
-  value: number;
+
   data: {
     id?: string;
     name: string;
@@ -20,7 +18,7 @@ interface IProps {
   };
 }
 
-export const ItemMenuCard = ({ data, value, idProduct }: IProps) => {
+export const ItemMenuCard = ({ data, idProduct }: IProps) => {
   return (
     <div
       className="w-60  p-2 bg-back-banner bg-cover bg-no-repeat rounded-xl mb-8 overflow-hidden max-sm:w-[80%] max-md:w-[90%] cursor-pointer hover:scale-125 transition-all duration-300 ease-in-out "
@@ -42,14 +40,6 @@ export const ItemMenuCard = ({ data, value, idProduct }: IProps) => {
           </p>
         </div>
       </Link>
-      <QuantityButton value={value}>
-        <button
-          type="button"
-          className="bg-gradient-to-r from-primary-green-1 from-0% to-primary-green-3 to-100% rounded-2xl px-2"
-        >
-          <Tote size={24} color="#ffffff" weight="regular" />
-        </button>
-      </QuantityButton>
     </div>
   );
 };

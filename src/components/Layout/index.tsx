@@ -1,8 +1,9 @@
 import { SignOut, ToteSimple, WhatsappLogo } from '@phosphor-icons/react';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
 
 import { AuthContext } from '../../contexts/AuthContext';
+import { CART_DATA } from '../../pages/Cart';
 import { Button } from '../Button';
 import MenuIcon from '../Icons/MenuIcon';
 import { Image } from '../Image';
@@ -16,11 +17,15 @@ const Layout = ({ onClickMenu }: IPropsDropdownMenu) => {
   const { userIsLogged, signOut, userData } = useContext(AuthContext);
   const location = useLocation();
   const navigate = useNavigate();
-  const [countItem, setCountItem] = useState(10);
+  const [countItem, setCountItem] = useState(CART_DATA.length);
 
   const handleClickDropDownMenu = () => {
     onClickMenu();
   };
+
+  useEffect(() => {
+    setCountItem(CART_DATA.length);
+  }, []);
 
   const cartItem = (
     <li

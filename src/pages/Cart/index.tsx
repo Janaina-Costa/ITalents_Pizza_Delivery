@@ -22,6 +22,7 @@ import { IProduct } from '../../types/Product';
 import { IAdressUser } from '../../types/User';
 
 export const ADDRESS_DATA = JSON.parse(localStorage.getItem('address') || '{}');
+export const CART_DATA = JSON.parse(localStorage.getItem('cart') || '[]');
 
 export const Cart = () => {
   const { createAddress } = userService;

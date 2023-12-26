@@ -6,6 +6,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 import { CountButton } from '../../components/CountButton';
 import { ProductDetail } from '../../components/Product';
+import { LoadingSpinner } from '../../components/Spinner';
 import { productService } from '../../services/productService';
 import { IProduct } from '../../types/Product';
 
@@ -16,6 +17,7 @@ export const Product = () => {
   const [total, setTotal] = useState<number>();
   const [product, setProduct] = useState<IProduct>();
   const { getProductById } = productService;
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const navigate = useNavigate();
 
@@ -50,7 +52,13 @@ export const Product = () => {
       cart.push(...cartStorage);
     }
     localStorage.setItem('cart', JSON.stringify(cart));
-    alert('Produto adicionado ao carrinho');
+    setIsLoading(true);
+    setTimeout(() => {
+      setIsLoading(false);
+      alert('Produto adicionado ao carrinho');
+      navigate('/');
+      window.location.reload();
+    }, 500);
   };
   // TODO quando estiver com zero perguntar se quer remover o item da sacola
   useEffect(() => {
@@ -92,6 +100,7 @@ export const Product = () => {
           onClickPlus={handleCountSum}
           onChangeInput={handleChangeInputCount}
         />
+        {isLoading && <LoadingSpinner />}
       </ProductDetail>
     </div>
   );
