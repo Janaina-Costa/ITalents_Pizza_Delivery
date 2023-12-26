@@ -9,7 +9,7 @@ import { api as apiServer } from '../services/api';
 import { userService } from '../services/userSevice';
 import { IUser } from '../types/User';
 
-const USER_DATA = JSON.parse(localStorage.getItem('user-data') || '{}');
+export const USER_DATA = JSON.parse(localStorage.getItem('user-data') || '{}');
 
 export const useAuth = () => {
   const [userIsLogged, setUserIsLogged] = useState<boolean>(false);
@@ -42,6 +42,7 @@ export const useAuth = () => {
     const data = await userService.getUserById(idUser);
     if (!data) {
       localStorage.clear();
+      setUserIsLogged(false);
       navigate('/login');
     }
 

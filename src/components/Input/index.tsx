@@ -36,6 +36,7 @@ const Input: React.ForwardRefExoticComponent<
           onKeyUp={props.onKeyUp}
           value={props.value}
           name={props.name}
+          checked={props.checked}
           ref={ref}
         />
         {props.hasPassword ? (

@@ -83,22 +83,27 @@ const Layout = ({ onClickMenu }: IPropsDropdownMenu) => {
               <Link to="/admin">Admin</Link>
             </li>
             {userIsLogged ? (
-              <li className="flex gap-4 items-center ">
-                <p className="cursor-pointer hover:text-primary-red-0 ease-in-out duration-300">
-                  Olá, {userData?.name}!
-                </p>
-                <Image
-                  className="rounded-full w-12 border cursor-pointer"
-                  src={userData?.image}
-                  alt=""
-                />
+              <>
+                <li className="flex gap-4 items-center ">
+                  <p className="cursor-pointer hover:text-primary-red-0 ease-in-out duration-300">
+                    Olá, {userData?.name}!
+                  </p>
+                </li>
+                <li>
+                  <Image
+                    className="rounded-full w-12 border cursor-pointer"
+                    src={userData?.image}
+                    alt={`imagem de ${userData?.name}`}
+                  />
+                </li>
+
                 <SignOut
                   className="cursor-pointer text- hover:brightness-105  hover:text-primary-red-0 ease-in-out duration-300"
                   size={24}
                   weight="bold"
                   onClick={signOut}
                 />
-              </li>
+              </>
             ) : (
               <>
                 <li className="cursor-pointer  hover:text-primary-red-0 ease-in-out duration-300">
