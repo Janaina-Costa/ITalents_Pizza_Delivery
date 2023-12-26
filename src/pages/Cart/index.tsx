@@ -1,20 +1,102 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import { Trash } from '@phosphor-icons/react';
-import { useEffect, useState } from 'react';
+import { MapPinLine, Trash } from '@phosphor-icons/react';
+import axios from 'axios';
+import { ChangeEvent, useContext, useEffect, useState } from 'react';
 
 import { Button } from '../../components/Button';
 import { Divider } from '../../components/Divider';
 import { Image } from '../../components/Image';
 import Input from '../../components/Input';
 import { QuantityButton } from '../../components/QuantityButton';
+import { AuthContext } from '../../contexts/AuthContext';
+import { USER_DATA } from '../../hooks/useAuth';
+import { userService } from '../../services/userSevice';
 import { IProduct } from '../../types/Product';
+import { IAdressUser } from '../../types/User';
+
+export const ADDRESS_DATA = JSON.parse(localStorage.getItem('address') || '{}');
 
 export const Cart = () => {
+  const { createAddress } = userService;
+  const { userData } = useContext(AuthContext);
   const [productsCart, setProductsCart] = useState<IProduct[]>([]);
   const [totalProduct, setTotalProduct] = useState(0);
   const [purchaseTotal, setPurchaseTotal] = useState(0);
+  const [addressIsFilled, setAddressIsFilled] = useState('');
+  const [address, setAddress] = useState<IAdressUser>({
+    cep: '',
+    street: '',
+    complement: '',
+    number: '',
+    neighborhood: '',
+  });
+  const [showFormAddress, setShowFormAddress] = useState<boolean>(false);
   const deliveryTax = 5;
+  const { id } = USER_DATA;
+
+  const handleChangeValue = (e: ChangeEvent<HTMLInputElement> | any) => {
+    setAddress({ ...address, [e.target.name]: e.target.value });
+  };
+  const resumeAddress = userData?.addresses.find(
+    (addressId) => addressId._id === addressIsFilled,
+  );
+  const dataStorage = {
+    street: resumeAddress?.street,
+    number: resumeAddress?.number,
+    complement: resumeAddress?.complement,
+    neighborhood: resumeAddress?.neighborhood,
+  };
+
+  const handleChangeSelect = (e: ChangeEvent<HTMLSelectElement> | any) => {
+    setAddressIsFilled(e.target.value);
+    localStorage.setItem('address', JSON.stringify(dataStorage));
+  };
+
+  const getAddress = async () => {
+    const response = await axios.get(
+      `https://viacep.com.br/ws/${address.cep}/json`,
+    );
+    if (response) {
+      setAddress({
+        ...address,
+        street: response.data.logradouro,
+        neighborhood: response.data.bairro,
+      });
+    }
+  };
+
+  const saveAddress = async () => {
+    try {
+      const response = await createAddress(id, address);
+      if (response) {
+        alert('Endereço criado com sucesso');
+        setAddress({
+          cep: '',
+          street: '',
+          complement: '',
+          number: '',
+          neighborhood: '',
+        });
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const sendOrder = () => {
+    const order = productsCart.map((product) => {
+      return {
+        id: product._id,
+        quantity: product.quantity,
+      };
+    });
+
+    console.log(order);
+  };
 
   useEffect(() => {
     const storageCart = JSON.parse(localStorage.getItem('cart') || '[]');
@@ -28,61 +110,119 @@ export const Cart = () => {
     setTotalProduct(totalCart);
     setPurchaseTotal(totalCart + deliveryTax);
   }, [productsCart]);
+
+  if (!userData) {
+    return;
+  }
   return (
     <main className="relative grid grid-cols-2 gap-4 max-w-7xl max-md:grid-cols-1 mx-auto mt-28 bg-black ">
       <div className="p-4 ">
-        <h1 className="text-2xl">Endereço da entrega</h1>
-        <div className="flex flex-col mt-4">
-          <Input
-            id="zipCode"
-            name="zipCode"
-            required
-            type="text"
-            placeholder="CEP"
-            // ref={inputRef}
-            className="bg-transparent py-2 pl-4 w-full max-w-full rounded outline-none mb-4"
-          />
-
-          <Input
-            id="street"
-            name="street"
-            required
-            type="text"
-            placeholder="Rua"
-            // ref={inputRef}
-            className="bg-transparent py-2 pl-4 w-full max-w-full rounded outline-none mb-4"
-          />
-          <div className="flex gap-3">
-            <Input
-              id="number"
-              name="number"
-              required
-              type="text"
-              placeholder="Nº"
-              // ref={inputRef}
-              className="bg-transparent py-2 pl-4 w-full max-w-full rounded outline-none mb-4"
-            />
-
-            <Input
-              id="complement"
-              name="complement"
-              type="text"
-              placeholder="Complemento"
-              // ref={inputRef}
-              className="bg-transparent py-2 pl-4 w-full max-w-full rounded outline-none mb-4"
-            />
+        {userData?.addresses?.length > 0 && (
+          <div className="flex flex-col gap-4 mb-6">
+            <h1 className="text-2xl">Selecione o endereço de entrega</h1>
+            <select
+              name="address-selected"
+              id="address-selected"
+              className="bg-transparent py-2 px-4 w-full max-w-full rounded outline-none border border-gray-500 focus:outline-none ring-primary-green-1 transition duration-500 focus:ring-1 resize-none mb-4"
+              onChange={handleChangeSelect}
+            >
+              {userData.addresses.map((add: IAdressUser) => (
+                <option
+                  className="flex flex-col justify-between gap-4 mb-6"
+                  value={`${add._id}`}
+                  key={add._id}
+                >
+                  <span>{add.street}, </span>
+                  <span>{add.number} </span>
+                </option>
+              ))}
+            </select>
           </div>
-
-          <Input
-            id="neighborhood"
-            name="neighborhood"
-            required
-            type="text"
-            placeholder="Bairro"
-            // ref={inputRef}
-            className="bg-transparent py-2 pl-4 w-full max-w-full rounded outline-none mb-4"
-          />
+        )}
+        <Divider />
+        <div className="flex items-center  gap-2">
+          <MapPinLine size={28} />
+          <h1
+            className="text-1xl underline cursor-pointer"
+            onClick={() => setShowFormAddress((prev) => !prev)}
+          >
+            Adicionar novo endereço de entrega
+          </h1>
         </div>
+        {showFormAddress && (
+          <>
+            <div className="flex flex-col mt-4">
+              <Input
+                id="zipCode"
+                name="cep"
+                required
+                type="text"
+                placeholder="CEP"
+                value={address.cep}
+                onChange={handleChangeValue}
+                // ref={inputRef}
+                className="bg-transparent py-2 pl-4 w-full max-w-full rounded outline-none mb-4"
+              />
+
+              <Input
+                id="street"
+                name="street"
+                required
+                type="text"
+                placeholder="Rua"
+                value={address.street}
+                onChange={handleChangeValue}
+                onFocus={getAddress}
+                // ref={inputRef}
+                className="bg-transparent py-2 pl-4 w-full max-w-full rounded outline-none mb-4"
+              />
+              <div className="flex gap-3">
+                <Input
+                  id="number"
+                  name="number"
+                  required
+                  type="text"
+                  placeholder="Nº"
+                  value={address.number}
+                  onChange={handleChangeValue}
+                  // ref={inputRef}
+                  className="bg-transparent py-2 pl-4 w-full max-w-full rounded outline-none mb-4"
+                />
+
+                <Input
+                  id="complement"
+                  name="complement"
+                  type="text"
+                  placeholder="Complemento"
+                  value={address.complement}
+                  onChange={handleChangeValue}
+                  // ref={inputRef}
+                  className="bg-transparent py-2 pl-4 w-full max-w-full rounded outline-none mb-4"
+                />
+              </div>
+
+              <Input
+                id="neighborhood"
+                name="neighborhood"
+                required
+                type="text"
+                placeholder="Bairro"
+                value={address.neighborhood}
+                onChange={handleChangeValue}
+                // ref={inputRef}
+                className="bg-transparent py-2 pl-4 w-full max-w-full rounded outline-none mb-4"
+              />
+            </div>
+            <Button
+              type="button"
+              className="w-full max-w-full rounded-lg"
+              isSelected
+              onClick={saveAddress}
+            >
+              Salvar Endereço
+            </Button>
+          </>
+        )}
       </div>
       <div className="p-4 flex flex-col ">
         <h1 className="text-2xl">Resumo da compra</h1>
@@ -113,10 +253,28 @@ export const Cart = () => {
           <div className="flex justify-between">
             Total+ entrega <span>R$ {purchaseTotal}</span>
           </div>
+          {addressIsFilled && (
+            <div>
+              <Divider className="mb-8" />
+              <h3 className="mb-4 font-bold">Endereço de Entrega</h3>
+              <div>
+                <span>Rua: {resumeAddress?.street}, </span>
+                <span>nº {resumeAddress?.number} </span>
+                <span>
+                  {' '}
+                  {resumeAddress?.complement
+                    ? `- ${resumeAddress?.complement}`
+                    : ''}
+                </span>
+                <span>- {resumeAddress?.neighborhood}</span>
+              </div>
+            </div>
+          )}
           <Button
             type="button"
             className="w-full max-w-full rounded-lg"
             isSelected
+            onClick={sendOrder}
           >
             Enviar Pedido
           </Button>

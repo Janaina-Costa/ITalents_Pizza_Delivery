@@ -2,7 +2,7 @@ export interface IAdressUser {
   _id?: string;
   cep: string;
   street: string;
-  number: number;
+  number: string;
   complement: string;
   neighborhood: string;
 }

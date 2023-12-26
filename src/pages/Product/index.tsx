@@ -50,6 +50,7 @@ export const Product = () => {
       cart.push(...cartStorage);
     }
     localStorage.setItem('cart', JSON.stringify(cart));
+    alert('Produto adicionado ao carrinho');
   };
   // TODO quando estiver com zero perguntar se quer remover o item da sacola
   useEffect(() => {

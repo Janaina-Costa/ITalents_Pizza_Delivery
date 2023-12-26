@@ -1,6 +1,6 @@
 /* eslint-disable class-methods-use-this */
 /* eslint-disable consistent-return */
-import { IUser } from '../types/User';
+import { IAdressUser, IUser } from '../types/User';
 
 import { api } from './api';
 
@@ -35,6 +35,24 @@ class UserService {
   public async getUserById(id: string) {
     try {
       const response = await api.get(`/user/${id}`);
+      return response.data;
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  public async createAddress(
+    id: string,
+    { cep, complement, neighborhood, number, street }: IAdressUser,
+  ) {
+    try {
+      const response = await api.post(`/user/createAddress/${id}`, {
+        cep,
+        street,
+        number,
+        complement,
+        neighborhood,
+      });
       return response.data;
     } catch (err) {
       console.log(err);
