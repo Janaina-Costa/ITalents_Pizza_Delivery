@@ -1,31 +1,20 @@
-import { ChangeEvent } from 'react';
-
 import { Button } from '../Button';
 import Input from '../Input';
 
 interface IProps {
   onClickPlus: () => void;
   onClickMinus: () => void;
-  onChangeInput: (value: ChangeEvent<HTMLInputElement>) => void;
+
   counter: number;
 }
 
-export const CountButton = ({
-  counter,
-  onClickMinus,
-  onClickPlus,
-  onChangeInput,
-}: IProps) => {
+export const CountButton = ({ counter, onClickMinus, onClickPlus }: IProps) => {
   const handleCountSum = () => {
     onClickPlus();
   };
 
   const handleCountSub = () => {
     onClickMinus();
-  };
-
-  const handleChangeInput = (value: ChangeEvent<HTMLInputElement>) => {
-    onChangeInput(value);
   };
 
   return (
@@ -42,7 +31,6 @@ export const CountButton = ({
       <Input
         value={counter}
         className="w-[24px] bg-transparent border-none h-[48px] text-center !p-0"
-        onChange={handleChangeInput}
       />
 
       <Button

@@ -1,19 +1,22 @@
 /* eslint-disable no-useless-return */
 /* eslint-disable consistent-return */
 
-import { ChangeEvent, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { CountButton } from '../../components/CountButton';
 import { ProductDetail } from '../../components/Product';
 import { LoadingSpinner } from '../../components/Spinner';
+import { decrement, increment } from '../../features/counter/counterSlice';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { productService } from '../../services/productService';
 import { IProduct } from '../../types/Product';
 
 export const Product = () => {
   const { id } = useParams();
 
-  const [quantity, setQuantity] = useState<number>(1);
+  const quantity = useAppSelector((state) => state.counter.value);
+  const dispatch = useAppDispatch();
   const [total, setTotal] = useState<number>();
   const [product, setProduct] = useState<IProduct>();
   const { getProductById } = productService;
@@ -26,18 +29,14 @@ export const Product = () => {
   };
 
   const handleCountSum = () => {
-    setQuantity((prev) => prev + 1);
+    dispatch(increment());
   };
 
   const handleCountSub = () => {
     if (quantity <= 0) {
       return;
     }
-    setQuantity((prev) => prev - 1);
-  };
-
-  const handleChangeInputCount = (e: ChangeEvent<HTMLInputElement>) => {
-    setQuantity(Number(e.target.value));
+    dispatch(decrement());
   };
 
   const addToCart = () => {
@@ -98,7 +97,6 @@ export const Product = () => {
           counter={quantity}
           onClickMinus={handleCountSub}
           onClickPlus={handleCountSum}
-          onChangeInput={handleChangeInputCount}
         />
         {isLoading && <LoadingSpinner />}
       </ProductDetail>
