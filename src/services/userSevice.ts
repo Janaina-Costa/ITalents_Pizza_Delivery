@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable class-methods-use-this */
 /* eslint-disable consistent-return */
 import { IAdressUser, IUser } from '../types/interface/User';
@@ -83,6 +84,28 @@ class UserService {
         data: addressData,
       });
 
+      return response.data;
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  public async addFavoriteProduct(id: string, _id: string) {
+    try {
+      const response = await api.post(`/user/add-favorite/${id}`, {
+        _id,
+      });
+      return response.data;
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  public async removeFavoriteProduct(favoriteId: any) {
+    try {
+      const response = await api.delete(`/user/remove-favorite`, {
+        data: favoriteId,
+      });
       return response.data;
     } catch (err) {
       console.log(err);

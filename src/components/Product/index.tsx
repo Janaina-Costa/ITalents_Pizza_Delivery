@@ -14,7 +14,11 @@ interface IProps {
   title: string | undefined;
   description: string | undefined;
   total: number | undefined;
+  id: string | undefined;
+
   onAddToCart: () => void;
+  onAddFavoriteProduct: (id: string) => void;
+  onDelFavoriteProduct: () => void;
 }
 
 export const ProductDetail = ({
@@ -24,15 +28,25 @@ export const ProductDetail = ({
   title,
   description,
   total,
+  id,
+
   onClickToNavigate,
   onAddToCart,
+  onAddFavoriteProduct,
+  onDelFavoriteProduct,
 }: IProps) => {
-  const [isFavorite, setIsFavorite] = useState<boolean>(false);
+  const [isClickedBtn, setIsClicked] = useState(false);
 
-  const handleFavoriteProduct = () => {
-    setIsFavorite((prev) => !prev);
+  const handleAddFavoriteProduct = (productId: string) => {
+    setIsClicked((prev) => !prev);
+    onAddFavoriteProduct(productId);
   };
+  console.log(isClickedBtn);
 
+  const handleDelFavoriteProduct = () => {
+    setIsClicked((prev) => !prev);
+    onDelFavoriteProduct();
+  };
   const handleNavigate = () => {
     onClickToNavigate();
   };
@@ -59,11 +73,20 @@ export const ProductDetail = ({
           </div>
         </div>
         <HeartStraight
-          className="mt-3 cursor-pointer"
+          className={`mt-3 cursor-pointer ${isClickedBtn ? 'hidden' : 'block'}`}
           size={32}
-          color={isFavorite ? '#FF0000' : '#ffffff'}
+          color="#ffffff"
           weight="fill"
-          onClick={handleFavoriteProduct}
+          onClick={() => handleAddFavoriteProduct(id!)}
+        />
+        <HeartStraight
+          className={`mt-3 cursor-pointer ${
+            !isClickedBtn ? 'hidden' : 'block'
+          }`}
+          size={32}
+          color="red"
+          weight="fill"
+          onClick={handleDelFavoriteProduct}
         />
       </div>
 

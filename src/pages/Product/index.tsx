@@ -1,15 +1,18 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable no-useless-return */
 /* eslint-disable consistent-return */
 
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { CountButton } from '../../components/CountButton';
 import { ProductDetail } from '../../components/Product';
 import { LoadingSpinner } from '../../components/Spinner';
+import { AuthContext } from '../../contexts/AuthContext';
 import { decrement, increment } from '../../features/counter/counterSlice';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { productService } from '../../services/productService';
+import { userService } from '../../services/userSevice';
 import { IProduct } from '../../types/interface/Product';
 import { reload } from '../../utils/reload';
 
@@ -22,6 +25,8 @@ export const Product = () => {
   const [product, setProduct] = useState<IProduct>();
   const { getProductById } = productService;
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const { addFavoriteProduct, removeFavoriteProduct } = userService;
+  const { userData } = useContext(AuthContext);
 
   const navigate = useNavigate();
 
@@ -61,6 +66,31 @@ export const Product = () => {
     }, 500);
   };
   // TODO quando estiver com zero perguntar se quer remover o item da sacola
+  const handleAddFavoriteProduct = async () => {
+    if (!userData?._id || !product?._id) {
+      return;
+    }
+    console.log(userData._id, product._id);
+
+    const response = await addFavoriteProduct(userData._id, product?._id);
+    if (response) {
+      alert('Produto adicionado aos favoritos');
+    }
+  };
+
+  const handleRemoveFavoriteProduct = async () => {
+    if (!userData?._id || !product?._id) {
+      return;
+    }
+    const response = await removeFavoriteProduct({
+      id: userData?._id,
+      productId: product._id,
+    });
+    if (response) {
+      alert('Produto removido dos favoritos');
+    }
+  };
+
   useEffect(() => {
     if (!id) {
       return;
@@ -83,9 +113,16 @@ export const Product = () => {
     setTotal(totalValue);
   }, [quantity, product]);
 
+  useEffect(() => {
+    if (!userData?._id || !product?._id) {
+      return;
+    }
+  }, [product, userData]);
+
   return (
     <div className="bg-black max-w-[40rem] m-auto mt-16 p-8 flex flex-col items-center max-md:mt-0 max-md:h-screen overflow-hidden mt-28">
       <ProductDetail
+        id={product?._id}
         alt={product?.name}
         src={product?.image}
         description={product?.description}
@@ -93,6 +130,8 @@ export const Product = () => {
         total={total}
         onClickToNavigate={redirectTo}
         onAddToCart={addToCart}
+        onAddFavoriteProduct={handleAddFavoriteProduct}
+        onDelFavoriteProduct={handleRemoveFavoriteProduct}
       >
         <CountButton
           counter={quantity}
