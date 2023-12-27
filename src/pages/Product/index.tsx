@@ -11,6 +11,7 @@ import { decrement, increment } from '../../features/counter/counterSlice';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { productService } from '../../services/productService';
 import { IProduct } from '../../types/interface/Product';
+import { reload } from '../../utils/reload';
 
 export const Product = () => {
   const { id } = useParams();
@@ -56,7 +57,7 @@ export const Product = () => {
       setIsLoading(false);
       alert('Produto adicionado ao carrinho');
       navigate('/');
-      window.location.reload();
+      reload();
     }, 500);
   };
   // TODO quando estiver com zero perguntar se quer remover o item da sacola

@@ -20,6 +20,7 @@ import { orderService } from '../../services/orderService';
 import { userService } from '../../services/userSevice';
 import { IProduct } from '../../types/interface/Product';
 import { IAdressUser } from '../../types/interface/User';
+import { reload } from '../../utils/reload';
 
 export const ADDRESS_DATA = JSON.parse(localStorage.getItem('address') || '{}');
 export const CART_DATA = JSON.parse(localStorage.getItem('cart') || '[]');
@@ -90,6 +91,7 @@ export const Cart = () => {
           neighborhood: '',
         });
       }
+      reload();
     } catch (err) {
       console.log(err);
     }
@@ -136,6 +138,9 @@ export const Cart = () => {
       localStorage.setItem('cart', JSON.stringify(filterProduct));
       setProductsCart(filterProduct);
     }
+  };
+  const handleAddNewAddress = () => {
+    setShowFormAddress((prev) => !prev);
   };
 
   useEffect(() => {
@@ -184,7 +189,7 @@ export const Cart = () => {
           <MapPinLine size={28} />
           <h1
             className="text-1xl underline cursor-pointer "
-            onClick={() => setShowFormAddress((prev) => !prev)}
+            onClick={handleAddNewAddress}
           >
             Adicionar novo endereço de entrega
           </h1>

@@ -5,6 +5,7 @@ import { Divider } from '../../components/Divider';
 import { UserForm } from '../../components/Forms/UserForm';
 import { UserAddressForm } from '../../components/Forms/UserForm/UserAddress';
 import { userService } from '../../services/userSevice';
+import { reload } from '../../utils/reload';
 
 export const UserPage = () => {
   const [inputValue, setInputValue] = useState({
@@ -41,7 +42,7 @@ export const UserPage = () => {
     if (response) {
       setInputValue(response);
       alert('Dados alterados com sucesso!');
-      window.location.reload();
+      reload();
     }
   };
 
