@@ -77,9 +77,11 @@ class UserService {
     }
   }
 
-  public async deleteAddress(dataAddress: any) {
+  public async deleteAddress(addressData: any) {
     try {
-      const response = await api.delete('/user/removeAddress', dataAddress);
+      const response = await api.delete(`/user/removeAddress`, {
+        data: addressData,
+      });
 
       return response.data;
     } catch (err) {

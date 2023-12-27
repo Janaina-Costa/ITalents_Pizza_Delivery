@@ -5,6 +5,7 @@ import { ChangeEvent, useContext, useState } from 'react';
 import { AuthContext } from '../../../../contexts/AuthContext';
 import { userService } from '../../../../services/userSevice';
 import { IAdressUser } from '../../../../types/interface/User';
+import { reload } from '../../../../utils/reload';
 import { Button } from '../../../Button';
 
 export const UserAddressForm = () => {
@@ -28,19 +29,15 @@ export const UserAddressForm = () => {
   };
 
   const handleRemoveAddress = async () => {
-    console.log({
+    const resp = await deleteAddress({
       id: userData?._id,
       addressId: resumeAddress?._id,
-    });
-
-    const resp = await deleteAddress({
-      id: '658b88345551fa61266ccc5d',
-      addressId: '658b8888c8f4166aeb2df35d',
     });
     console.log(resp);
 
     if (resp) {
       alert('Endereço removido com sucesso!');
+      reload();
     }
   };
 
@@ -49,7 +46,7 @@ export const UserAddressForm = () => {
   }
   return (
     <div>
-      {userData?.addresses?.length > 0 && (
+      {userData?.addresses?.length > 0 ? (
         <div className="flex flex-col justify-center items-center gap-4 mb-6">
           <p className="text-center mt-4 text-lg font-bold">
             Lista de endereços cadastrados
@@ -64,7 +61,7 @@ export const UserAddressForm = () => {
               className="flex flex-col justify-between gap-4 mb-6  bg-black"
               value="Selecione"
             >
-              Selecione
+              Selecione para remover
             </option>
             {userData.addresses.map((add: IAdressUser) => (
               <option
@@ -78,6 +75,10 @@ export const UserAddressForm = () => {
             ))}
           </select>
         </div>
+      ) : (
+        <p className="text-center mt-4 text-lg font-bold">
+          Você ainda não possui nenhum endereço cadastrado
+        </p>
       )}
       {addressIsFilled && (
         <div className="flex items-center gap-4">
