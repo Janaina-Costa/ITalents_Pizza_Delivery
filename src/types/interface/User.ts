@@ -12,12 +12,13 @@ export interface IFavoriteProduct {
 }
 
 export interface IUser {
-  id: string;
+  _id?: string;
   name: string;
   email: string;
   password: string;
   phone: string;
   image: string;
+  isAdmin?: boolean;
   addresses: IAdressUser[];
   favorite_product: IFavoriteProduct[];
 }

@@ -46,7 +46,6 @@ export const UpdateProduct = () => {
       ...inputProductForm,
       [event.target.name]: event.target.value,
     });
-    console.log(inputProductForm);
   };
 
   const handleSubmit = async (event: FormEvent) => {
@@ -54,7 +53,7 @@ export const UpdateProduct = () => {
       return;
     }
     event.preventDefault();
-    console.log(inputProductForm);
+
     const response = await updateProduct(id, inputProductForm);
     if (response) {
       alert('Produto atualizado com sucesso!');

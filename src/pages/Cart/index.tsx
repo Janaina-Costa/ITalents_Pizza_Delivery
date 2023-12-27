@@ -163,12 +163,12 @@ export const Cart = () => {
             <select
               name="address-selected"
               id="address-selected"
-              className="bg-transparent py-2 px-4 w-full max-w-full rounded outline-none border border-gray-500 focus:outline-none ring-primary-green-1 transition duration-500 focus:ring-1 resize-none mb-4"
+              className="bg-transparent py-2 px-4 w-full max-w-full rounded outline-none border border-gray-500 focus:outline-none ring-primary-green-1 transition duration-500 focus:ring-1 resize-none mb-4 "
               onChange={handleChangeSelect}
             >
               {userData.addresses.map((add: IAdressUser) => (
                 <option
-                  className="flex flex-col justify-between gap-4 mb-6"
+                  className="flex flex-col justify-between gap-4 mb-6  bg-black"
                   value={`${add._id}`}
                   key={add._id}
                 >

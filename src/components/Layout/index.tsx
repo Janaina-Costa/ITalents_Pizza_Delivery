@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import { SignOut, ToteSimple, WhatsappLogo } from '@phosphor-icons/react';
 import { useContext, useEffect, useState } from 'react';
 import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
@@ -84,14 +85,19 @@ const Layout = ({ onClickMenu }: IPropsDropdownMenu) => {
               <Link to="/promotions">Contato</Link>
             </li>
             {cartItem}
-            <li className="cursor-pointer  hover:text-primary-red-0 ease-in-out duration-300">
-              <Link to="/admin">Admin</Link>
-            </li>
+            {userData?.isAdmin && (
+              <li className="cursor-pointer  hover:text-primary-red-0 ease-in-out duration-300">
+                <Link to="/admin">Admin</Link>
+              </li>
+            )}
             {userIsLogged ? (
               <>
                 <li className="flex gap-4 items-center ">
                   <p className="cursor-pointer hover:text-primary-red-0 ease-in-out duration-300">
-                    Olá, {userData?.name}!
+                    <Link to={`/user/${userData?._id}`}>
+                      {' '}
+                      Olá, {userData?.name}!
+                    </Link>
                   </p>
                 </li>
                 <li>

@@ -15,6 +15,7 @@ import { Product } from './pages/Product';
 import { Promotions } from './pages/Promotions';
 import { Recover } from './pages/Recover';
 import { Register } from './pages/Register';
+import { UserPage } from './pages/UserPage';
 import { ProtectedRoute } from './routes/ProtectedRoute';
 
 function App() {
@@ -40,6 +41,15 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/recovery" element={<Recover />} />
           <Route path="/promotions" element={<Promotions />} />
+
+          <Route
+            path="/user/:id"
+            element={
+              <ProtectedRoute>
+                <UserPage />
+              </ProtectedRoute>
+            }
+          />
 
           <Route
             path="/cart"
