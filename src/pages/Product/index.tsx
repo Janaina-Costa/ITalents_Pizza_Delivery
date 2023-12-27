@@ -11,6 +11,7 @@ import { LoadingSpinner } from '../../components/Spinner';
 import { AuthContext } from '../../contexts/AuthContext';
 import { decrement, increment } from '../../features/counter/counterSlice';
 import { useAppDispatch, useAppSelector } from '../../hooks';
+import { USER_DATA } from '../../hooks/useAuth';
 import { productService } from '../../services/productService';
 import { userService } from '../../services/userSevice';
 import { IProduct } from '../../types/interface/Product';
@@ -72,11 +73,10 @@ export const Product = () => {
     if (!userData?._id || !product?._id) {
       return;
     }
-    console.log('kjj');
 
     if (isFavorite) {
       const response = await removeFavoriteProduct({
-        id: userData?._id,
+        id: USER_DATA.id,
         productId: product._id,
       });
       if (response) {
@@ -95,7 +95,7 @@ export const Product = () => {
       return;
     }
 
-    const response = await addFavoriteProduct(userData._id, product?._id);
+    const response = await addFavoriteProduct(USER_DATA.id, product?._id);
     if (response) {
       alert('Produto adicionado aos favoritos');
       reload();

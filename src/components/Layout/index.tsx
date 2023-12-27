@@ -73,16 +73,14 @@ const Layout = ({ onClickMenu }: IPropsDropdownMenu) => {
                 <Link to="/">Home</Link>
               </li>
             )}
-            <li className="cursor-pointer  hover:text-primary-red-0 ease-in-out duration-300">
-              <Link to="/promotions">Promoções</Link>
-            </li>
+
             <li className="cursor-pointer flex items-center gap-2 hover:text-primary-red-0 ease-in-out duration-300">
               <WhatsappLogo
                 size={24}
                 weight="light"
                 className="text-primary-green-0"
               />{' '}
-              <Link to="/promotions">Contato</Link>
+              <Link to="/contacts">Contato</Link>
             </li>
             {cartItem}
             {userData?.isAdmin && (
@@ -92,6 +90,9 @@ const Layout = ({ onClickMenu }: IPropsDropdownMenu) => {
             )}
             {userIsLogged ? (
               <>
+                <li className="cursor-pointer  hover:text-primary-red-0 ease-in-out duration-300">
+                  <Link to="/my-orders">Meus pedidos</Link>
+                </li>
                 <li className="flex gap-4 items-center ">
                   <p className="cursor-pointer hover:text-primary-red-0 ease-in-out duration-300">
                     <Link to={`/user/${userData?._id}`}>

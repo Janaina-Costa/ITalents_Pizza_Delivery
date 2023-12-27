@@ -9,6 +9,15 @@ class OrderService {
       console.log(err);
     }
   }
+
+  public async findAllOrder() {
+    try {
+      const response = await api.get('/orders');
+      return response.data;
+    } catch (err) {
+      console.log(err);
+    }
+  }
 }
 
 export const orderService = new OrderService();

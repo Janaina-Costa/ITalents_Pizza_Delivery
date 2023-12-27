@@ -164,13 +164,19 @@ export const Cart = () => {
       <div className="p-4 ">
         {userData?.addresses?.length > 0 && (
           <div className="flex flex-col gap-4 mb-6">
-            <h1 className="text-2xl">Selecione o endereço de entrega</h1>
+            <h1 className="text-2xl">Escolha o endereço da entrega</h1>
             <select
               name="address-selected"
               id="address-selected"
               className="bg-transparent py-2 px-4 w-full max-w-full rounded outline-none border border-gray-500 focus:outline-none ring-primary-green-1 transition duration-500 focus:ring-1 resize-none mb-4 "
               onChange={handleChangeSelect}
             >
+              <option
+                value="selecione"
+                className="flex flex-col justify-between gap-4 mb-6  bg-black"
+              >
+                Selecione aqui
+              </option>
               {userData.addresses.map((add: IAdressUser) => (
                 <option
                   className="flex flex-col justify-between gap-4 mb-6  bg-black"
