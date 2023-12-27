@@ -15,6 +15,7 @@ interface IProps {
   description: string | undefined;
   total: number | undefined;
   id: string | undefined;
+  className: string | undefined;
 
   onAddToCart: () => void;
   onAddFavoriteProduct: (id: string) => void;
@@ -29,7 +30,7 @@ export const ProductDetail = ({
   description,
   total,
   id,
-
+  className,
   onClickToNavigate,
   onAddToCart,
   onAddFavoriteProduct,
@@ -73,18 +74,18 @@ export const ProductDetail = ({
           </div>
         </div>
         <HeartStraight
-          className={`mt-3 cursor-pointer ${isClickedBtn ? 'hidden' : 'block'}`}
+          className={`${className} mt-3 cursor-pointer -z-40 ${
+            isClickedBtn ? 'hidden' : 'block'
+          }`}
           size={32}
-          color="#ffffff"
           weight="fill"
           onClick={() => handleAddFavoriteProduct(id!)}
         />
         <HeartStraight
-          className={`mt-3 cursor-pointer ${
+          className={`${className} mt-3 cursor-pointer -z-40 ${
             !isClickedBtn ? 'hidden' : 'block'
           }`}
           size={32}
-          color="red"
           weight="fill"
           onClick={handleDelFavoriteProduct}
         />

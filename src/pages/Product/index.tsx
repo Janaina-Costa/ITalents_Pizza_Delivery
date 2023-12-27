@@ -21,12 +21,13 @@ export const Product = () => {
 
   const quantity = useAppSelector((state) => state.counter.value);
   const dispatch = useAppDispatch();
-  const [total, setTotal] = useState<number>();
-  const [product, setProduct] = useState<IProduct>();
   const { getProductById } = productService;
-  const [isLoading, setIsLoading] = useState<boolean>(false);
   const { addFavoriteProduct, removeFavoriteProduct } = userService;
   const { userData } = useContext(AuthContext);
+  const [total, setTotal] = useState<number>();
+  const [product, setProduct] = useState<IProduct>();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isFavorite, setIsFavorite] = useState<boolean>(false);
 
   const navigate = useNavigate();
 
@@ -66,28 +67,38 @@ export const Product = () => {
     }, 500);
   };
   // TODO quando estiver com zero perguntar se quer remover o item da sacola
-  const handleAddFavoriteProduct = async () => {
-    if (!userData?._id || !product?._id) {
-      return;
-    }
-    console.log(userData._id, product._id);
-
-    const response = await addFavoriteProduct(userData._id, product?._id);
-    if (response) {
-      alert('Produto adicionado aos favoritos');
-    }
-  };
 
   const handleRemoveFavoriteProduct = async () => {
     if (!userData?._id || !product?._id) {
       return;
     }
-    const response = await removeFavoriteProduct({
-      id: userData?._id,
-      productId: product._id,
-    });
+    console.log('kjj');
+
+    if (isFavorite) {
+      const response = await removeFavoriteProduct({
+        id: userData?._id,
+        productId: product._id,
+      });
+      if (response) {
+        alert('Produto removido dos favoritos');
+        reload();
+      }
+    }
+  };
+
+  const handleAddFavoriteProduct = async () => {
+    if (!userData?._id || !product?._id) {
+      return;
+    }
+
+    if (isFavorite) {
+      return;
+    }
+
+    const response = await addFavoriteProduct(userData._id, product?._id);
     if (response) {
-      alert('Produto removido dos favoritos');
+      alert('Produto adicionado aos favoritos');
+      reload();
     }
   };
 
@@ -119,6 +130,20 @@ export const Product = () => {
     }
   }, [product, userData]);
 
+  useEffect(() => {
+    if (!userData?._id || !product?._id) {
+      return;
+    }
+    const isFavoriteProduct = userData?.favorite_product.filter(
+      (item) => item._id === product?._id,
+    );
+
+    if (isFavoriteProduct[0]) {
+      return setIsFavorite(true);
+    }
+    setIsFavorite(false);
+  }, [product, userData, id]);
+
   return (
     <div className="bg-black max-w-[40rem] m-auto mt-16 p-8 flex flex-col items-center max-md:mt-0 max-md:h-screen overflow-hidden mt-28">
       <ProductDetail
@@ -132,6 +157,7 @@ export const Product = () => {
         onAddToCart={addToCart}
         onAddFavoriteProduct={handleAddFavoriteProduct}
         onDelFavoriteProduct={handleRemoveFavoriteProduct}
+        className={`${isFavorite ? 'text-primary-red-1' : 'text-white'}`}
       >
         <CountButton
           counter={quantity}
