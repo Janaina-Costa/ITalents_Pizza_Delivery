@@ -11,7 +11,7 @@ interface IInput extends InputHTMLAttributes<HTMLInputElement> {
 const Input: React.ForwardRefExoticComponent<
   IInput & React.RefAttributes<HTMLInputElement>
 > = React.forwardRef<HTMLInputElement, IInput>(
-  ({ hasIconLeft = false, className, ...props }, ref) => {
+  ({ hasIconLeft = false, className, disabled = false, ...props }, ref) => {
     const handleClickIconPassword = () => {
       props.onClickIconPassword?.();
     };
@@ -38,6 +38,7 @@ const Input: React.ForwardRefExoticComponent<
           name={props.name}
           checked={props.checked}
           ref={ref}
+          disabled={disabled}
         />
         {props.hasPassword ? (
           <button

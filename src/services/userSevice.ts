@@ -4,7 +4,7 @@ import { IAdressUser, IUser } from '../types/interface/User';
 
 import { api } from './api';
 
-type userCreate = Omit<IUser, 'id' | 'addresses' | 'favorite_product'>;
+type userType = Omit<IUser, 'id' | 'addresses' | 'favorite_product'>;
 
 class UserService {
   public async signIn(email: string, password: string) {
@@ -17,7 +17,7 @@ class UserService {
     }
   }
 
-  public async register({ name, email, image, password, phone }: userCreate) {
+  public async register({ name, email, image, password, phone }: userType) {
     try {
       const response = await api.post('/user/create', {
         name,
@@ -41,6 +41,24 @@ class UserService {
     }
   }
 
+  public async updateUser(
+    id: string,
+    { name, email, image, password, phone }: userType,
+  ) {
+    try {
+      const response = await api.put(`/user/update/${id}`, {
+        name,
+        email,
+        image,
+        password,
+        phone,
+      });
+      return response.data;
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
   public async createAddress(
     id: string,
     { cep, complement, neighborhood, number, street }: IAdressUser,
@@ -53,6 +71,16 @@ class UserService {
         complement,
         neighborhood,
       });
+      return response.data;
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  public async deleteAddress(dataAddress: any) {
+    try {
+      const response = await api.delete('/user/removeAddress', dataAddress);
+
       return response.data;
     } catch (err) {
       console.log(err);
