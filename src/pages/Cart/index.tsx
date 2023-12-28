@@ -122,9 +122,10 @@ export const Cart = () => {
 
       const responseOrder = await createOrder(order);
       if (responseOrder) {
-        alert('Order created with success');
+        alert('Pedido emviado com sucesso');
         localStorage.removeItem('cart');
-        navigate('/');
+        navigate('/thankyou');
+        reload();
       }
     }
   };

@@ -24,10 +24,6 @@ const Layout = ({ onClickMenu }: IPropsDropdownMenu) => {
     onClickMenu();
   };
 
-  useEffect(() => {
-    setCountItem(CART_DATA.length);
-  }, []);
-
   const cartItem = (
     <li
       className={`cursor-pointer hover:text-primary-red-0 ease-in-out duration-300 relative text-center ${
@@ -47,6 +43,9 @@ const Layout = ({ onClickMenu }: IPropsDropdownMenu) => {
     </li>
   );
 
+  useEffect(() => {
+    setCountItem(CART_DATA.length);
+  }, []);
   return (
     <>
       <header className="z-50 w-full fixed top-0 flex justify-center  ">
