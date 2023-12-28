@@ -39,6 +39,7 @@ const Input: React.ForwardRefExoticComponent<
           checked={props.checked}
           ref={ref}
           disabled={disabled}
+          required={props.required}
         />
         {props.hasPassword ? (
           <button
