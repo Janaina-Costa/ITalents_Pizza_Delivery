@@ -44,9 +44,7 @@ const dataBtn = [
 export const Menu = () => {
   const [listButtonsMenu, setListButtonsMenu] =
     useState<IPropsBtnMenu[]>(dataBtn);
-  const [listProductItems, setListProductItems] = useState<
-    Omit<IProduct, 'size'>[]
-  >([]);
+  const [listProductItems, setListProductItems] = useState<IProduct[]>([]);
   const [idSelected, setIdSelected] = useState(ProductCategoryEnum.TRADICIONAL);
   const { getAllProducts } = productService;
 
@@ -55,7 +53,6 @@ export const Menu = () => {
     if (!data) {
       return;
     }
-    console.log(data);
 
     setListProductItems(data);
   };
@@ -139,6 +136,7 @@ export const Menu = () => {
                 src: item.image,
                 alt: item.name,
                 description: item.description,
+                size: item.size !== 'nenhum' ? item.size.toUpperCase() : '',
               }}
             />
           ) : (

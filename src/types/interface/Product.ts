@@ -6,7 +6,7 @@ export interface IProduct {
   description: string;
   category: ProductCategoryEnum;
   image: string;
-  size?: '' | ProductSizesEnum;
+  size: '' | ProductSizesEnum;
   price: number;
   quantity?: number;
 }

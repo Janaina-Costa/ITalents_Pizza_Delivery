@@ -1,7 +1,8 @@
+/* eslint-disable jsx-a11y/control-has-associated-label */
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import { FormEvent, useEffect, useRef, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import { Button } from '../../../components/Button';
 import Input from '../../../components/Input';
@@ -11,6 +12,7 @@ import {
   ProductSizesEnum,
 } from '../../../types/enum/Product';
 import { IProduct } from '../../../types/interface/Product';
+import { notifySuccess } from '../../../utils/toast';
 
 export const UpdateProduct = () => {
   const { id } = useParams();
@@ -24,6 +26,7 @@ export const UpdateProduct = () => {
     category: ProductCategoryEnum.TRADICIONAL,
     size: ProductSizesEnum.N,
   });
+  const navigate = useNavigate();
 
   const getProduct = async () => {
     if (!id) {
@@ -56,7 +59,8 @@ export const UpdateProduct = () => {
 
     const response = await updateProduct(id, inputProductForm);
     if (response) {
-      alert('Produto atualizado com sucesso!');
+      notifySuccess('Produto atualizado com sucesso!');
+      navigate('/admin');
     }
   };
 
@@ -101,7 +105,11 @@ export const UpdateProduct = () => {
             onChange={handleInputChange}
           >
             {optionsCategory[0].map((option, index) => (
-              <option key={`${option}${index}`} value={option}>
+              <option
+                className="flex flex-col justify-between gap-4 mb-6  bg-black"
+                key={`${option}${index}`}
+                value={option}
+              >
                 {option.toLocaleUpperCase()}
               </option>
             ))}
@@ -158,7 +166,11 @@ export const UpdateProduct = () => {
             className="bg-transparent py-2 px-4 w-full max-w-full rounded outline-none border border-gray-500 focus:outline-none ring-primary-green-1 transition duration-500 focus:ring-1 resize-none"
           >
             {optionsSize[0].map((option, index) => (
-              <option key={`${option}${index}`} value={option}>
+              <option
+                className="flex flex-col justify-between gap-4 mb-6  bg-black"
+                key={`${option}${index}`}
+                value={option}
+              >
                 {option.toLocaleUpperCase()}
               </option>
             ))}

@@ -15,6 +15,7 @@ interface IProps {
     src: string;
     alt: string;
     price: number;
+    size: string;
   };
 }
 
@@ -27,17 +28,24 @@ export const ItemMenuCard = ({ data, idProduct }: IProps) => {
     >
       <Link to={`/product/${data.id}`} state={data.id}>
         <div>
-          <p className="text-left font-semibold">R${data.price} </p>
+          <p className="text-left font-semibold text-primary-green-0">
+            R$ {data.price}{' '}
+          </p>
           <div className="flex items-center justify-center">
             <Image src={data.src} alt={data.alt} className="cursor-pointer" />
           </div>
         </div>
 
-        <div className="text-left overflow-hidden mt-1">
-          <h1 className="font-extrabold">{data.name}</h1>
-          <p className="text-xs text-gray-400 h-8 break-words">
-            {data.description}
-          </p>
+        <div className="text-left flex  justify-between overflow-hidden mt-1">
+          <div>
+            <h1 className="font-extrabold">{data.name}</h1>
+            <p className="text-xs text-gray-400 mt-4 h-8 break-words overflow-hidden text-ellipsis">
+              {data.description}
+            </p>
+          </div>
+          <div>
+            <p className="mt-1 text-xs text-gray-100">{data.size}</p>
+          </div>
         </div>
       </Link>
     </div>

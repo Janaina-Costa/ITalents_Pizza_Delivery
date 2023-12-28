@@ -31,9 +31,9 @@ const Layout = ({ onClickMenu }: IPropsDropdownMenu) => {
       }`}
     >
       <Link to="cart">
-        <ToteSimple size={38} weight="light" />
+        <ToteSimple size={32} weight="light" />
         <span
-          className={`absolute top-2 text-base ${
+          className={`absolute top-[0.3rem] text-base ${
             countItem > 9 ? 'left-[25%]' : 'left-[35%]'
           } `}
         >
@@ -48,7 +48,7 @@ const Layout = ({ onClickMenu }: IPropsDropdownMenu) => {
   }, []);
   return (
     <>
-      <header className="z-50 w-full fixed top-0 flex justify-center  ">
+      <header className="z-[100] w-full fixed top-0 flex justify-center  ">
         <nav
           className="flex items-center max-w-7xl
                 {' '}mx-auto  py-3 px-2 bg-black w-full"
@@ -86,7 +86,6 @@ const Layout = ({ onClickMenu }: IPropsDropdownMenu) => {
                 Fale conosco
               </Link>
             </li>
-            {cartItem}
             {userData?.isAdmin && (
               <li className="cursor-pointer  hover:text-primary-red-0 ease-in-out duration-300">
                 <Link to="/admin">Admin</Link>
@@ -94,6 +93,7 @@ const Layout = ({ onClickMenu }: IPropsDropdownMenu) => {
             )}
             {userIsLogged ? (
               <>
+                {cartItem}
                 <li className="cursor-pointer  hover:text-primary-red-0 ease-in-out duration-300">
                   <Link to="/my-orders">Meus pedidos</Link>
                 </li>
@@ -139,10 +139,10 @@ const Layout = ({ onClickMenu }: IPropsDropdownMenu) => {
             )}
           </ul>
           <ul className="md:hidden flex items-center gap-8">
-            {cartItem}
             {userIsLogged ? (
               <>
-                <Link to={`/user/${userData?._id}`}>
+                {cartItem}
+                <Link className="max-sm:hidden" to={`/user/${userData?._id}`}>
                   {' '}
                   Olá, {userData?.name}!
                 </Link>
@@ -155,9 +155,9 @@ const Layout = ({ onClickMenu }: IPropsDropdownMenu) => {
                 </li>
               </>
             ) : (
-              <li className="cursor-pointer  hover:text-primary-red-0 ease-in-out duration-300">
+              <li className="cursor-pointer   hover:text-primary-red-0 ease-in-out duration-300">
                 <Button
-                  className=""
+                  className="max-sm:px-0 max-sm:py-2 text-sm"
                   type="button"
                   isSelected
                   onClick={() => navigate('/register')}

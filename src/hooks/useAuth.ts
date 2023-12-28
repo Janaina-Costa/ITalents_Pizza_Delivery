@@ -43,7 +43,7 @@ export const useAuth = () => {
     if (!data) {
       localStorage.clear();
       setUserIsLogged(false);
-      navigate('/login');
+      navigate('/');
     }
 
     setUserData(data);

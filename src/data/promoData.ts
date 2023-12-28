@@ -2,7 +2,8 @@ const promoData = [
   {
     id: '1',
     title: 'A boa do chef',
-    description: 'Massa bla la bla alala ',
+    description:
+      'Duis a ultrices elit. Proin elit sem, vestibulum id arcu quis, faucibus consectetur ipsum.  ',
     alt: 'imagem-pizza-promo',
     src: 'src/assets/pizza.png',
     price: 60,
@@ -10,7 +11,7 @@ const promoData = [
   {
     id: '2',
     title: 'Sábado em Nápoles',
-    description: 'Massa bla la bla alala ',
+    description: 'Fusce auctor quam felis, sed molestie eros condimentum at. ',
     alt: 'imagem-pizza-promo',
     src: 'src/assets/pizza.png',
     price: 40,
@@ -18,7 +19,7 @@ const promoData = [
   {
     id: '3',
     title: 'Marguerita Especial',
-    description: 'Massa bla la bla alala ',
+    description: 'Fusce auctor quam felis, sed molestie eros condimentum at. ',
     alt: 'imagem-pizza-promo',
     src: 'src/assets/pizza.png',
     price: 30,

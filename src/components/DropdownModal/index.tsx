@@ -19,7 +19,7 @@ interface IProps {
 }
 
 export const DropDownMenu = ({ className, onClick }: IProps) => {
-  const { signOut } = useContext(AuthContext);
+  const { signOut, userIsLogged } = useContext(AuthContext);
   return (
     <div
       className={`relative z-[9999] ${className}`}
@@ -83,7 +83,7 @@ export const DropDownMenu = ({ className, onClick }: IProps) => {
                             to="/login"
                             onClick={signOut}
                           >
-                            <SignOut /> Sair
+                            <SignOut /> {userIsLogged ? 'Sair' : 'Entrar'}
                           </Link>
                         </li>
                       </ul>

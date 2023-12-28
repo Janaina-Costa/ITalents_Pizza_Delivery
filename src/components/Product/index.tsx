@@ -42,7 +42,6 @@ export const ProductDetail = ({
     setIsClicked((prev) => !prev);
     onAddFavoriteProduct(productId);
   };
-  console.log(isClickedBtn);
 
   const handleDelFavoriteProduct = () => {
     setIsClicked((prev) => !prev);
