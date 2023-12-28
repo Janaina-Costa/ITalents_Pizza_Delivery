@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
 import './App.css';
-import { DropwDownMenu } from './components/DropdownModal';
+import { DropDownMenu } from './components/DropdownModal';
 import Layout from './components/Layout';
 import { Admin } from './pages/Admin';
 import { AddProduct } from './pages/Admin/AddProduct';
@@ -10,11 +10,12 @@ import { UpdateProduct } from './pages/Admin/UpdateProduct';
 import { Cart } from './pages/Cart';
 import { Home } from './pages/Home';
 import { Login } from './pages/Login';
+import { MyOrders } from './pages/MyOrders';
 import { PageNotFound } from './pages/NotFound';
 import { Product } from './pages/Product';
-import { Promotions } from './pages/Promotions';
 import { Recover } from './pages/Recover';
 import { Register } from './pages/Register';
+import { ThankyouPage } from './pages/Thankyou';
 import { UserPage } from './pages/UserPage';
 import { ProtectedRoute } from './routes/ProtectedRoute';
 
@@ -29,10 +30,12 @@ function App() {
     setIsOpenMenu(false);
   };
   return (
-    <div className="relative bg-bg-main-menu bg-no-repeat bg-cover ">
-      <DropwDownMenu
+    <div className="bg-bg-main-menu bg-no-repeat bg-cover ">
+      <DropDownMenu
         onClick={handleCloseDropdownMenu}
-        className={`${!isOpenMenu && 'hidden '}`}
+        className={`${
+          !isOpenMenu && 'hidden before:content backdrop-blur-md  '
+        } ${`md:hidden`} top-[-112]`}
       />
       <Routes>
         <Route element={<Layout onClickMenu={handleClickDropdownMenu} />}>
@@ -40,7 +43,15 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/recovery" element={<Recover />} />
-          <Route path="/promotions" element={<Promotions />} />
+
+          <Route
+            path="/my-orders"
+            element={
+              <ProtectedRoute>
+                <MyOrders />
+              </ProtectedRoute>
+            }
+          />
 
           <Route
             path="/user/:id"
@@ -82,6 +93,14 @@ function App() {
             element={
               <ProtectedRoute>
                 <UpdateProduct />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/thankyou"
+            element={
+              <ProtectedRoute>
+                <ThankyouPage />
               </ProtectedRoute>
             }
           />

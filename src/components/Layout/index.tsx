@@ -142,11 +142,10 @@ const Layout = ({ onClickMenu }: IPropsDropdownMenu) => {
             {cartItem}
             {userIsLogged ? (
               <>
-                <li className="flex gap-4 items-center ">
-                  <p className="cursor-pointer hover:text-primary-red-0 ease-in-out duration-300">
-                    Olá, {userData?.name}!
-                  </p>
-                </li>
+                <Link to={`/user/${userData?._id}`}>
+                  {' '}
+                  Olá, {userData?.name}!
+                </Link>
                 <li>
                   <Image
                     className="rounded-full w-12 border cursor-pointer"
