@@ -79,7 +79,12 @@ const Layout = ({ onClickMenu }: IPropsDropdownMenu) => {
                 weight="light"
                 className="text-primary-green-0"
               />{' '}
-              <Link to="/contacts">Contato</Link>
+              <Link
+                to="https://wa.me//5521999999999?text=Gostaria%20de%20acompanhar%20meu%20pedido"
+                target="_blank"
+              >
+                21-9999-99999
+              </Link>
             </li>
             {cartItem}
             {userData?.isAdmin && (
