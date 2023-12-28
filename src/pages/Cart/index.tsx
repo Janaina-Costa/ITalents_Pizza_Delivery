@@ -17,10 +17,11 @@ import { AuthContext } from '../../contexts/AuthContext';
 import { USER_DATA } from '../../hooks/useAuth';
 import { cartService } from '../../services/cartService';
 import { orderService } from '../../services/orderService';
-import { userService } from '../../services/userSevice';
+import { userService } from '../../services/userService';
 import { IProduct } from '../../types/interface/Product';
 import { IAdressUser } from '../../types/interface/User';
-import { reload } from '../../utils/reload';
+import { notifyErro, notifySuccess } from '../../utils/toast';
+import { wait } from '../../utils/wait';
 
 export const ADDRESS_DATA = JSON.parse(localStorage.getItem('address') || '{}');
 export const CART_DATA = JSON.parse(localStorage.getItem('cart') || '[]');
@@ -82,7 +83,7 @@ export const Cart = () => {
     try {
       const response = await createAddress(id, address);
       if (response) {
-        alert('Endereço criado com sucesso');
+        notifySuccess('Endereço criado com sucesso');
         setAddress({
           cep: '',
           street: '',
@@ -90,8 +91,10 @@ export const Cart = () => {
           number: '',
           neighborhood: '',
         });
+        wait(3001);
+      } else {
+        notifyErro('Erro ao criar endereço');
       }
-      reload();
     } catch (err) {
       console.log(err);
     }
@@ -122,11 +125,13 @@ export const Cart = () => {
 
       const responseOrder = await createOrder(order);
       if (responseOrder) {
-        alert('Pedido emviado com sucesso');
+        notifySuccess('Pedido enviado com sucesso');
         localStorage.removeItem('cart');
         navigate('/thankyou');
-        reload();
+        wait(3001);
       }
+    } else {
+      notifyErro('Erro ao enviar pedido');
     }
   };
 

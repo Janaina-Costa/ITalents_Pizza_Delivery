@@ -83,7 +83,7 @@ const Layout = ({ onClickMenu }: IPropsDropdownMenu) => {
                 to="https://wa.me//5521999999999?text=Gostaria%20de%20acompanhar%20meu%20pedido"
                 target="_blank"
               >
-                21-9999-99999
+                Fale conosco
               </Link>
             </li>
             {cartItem}

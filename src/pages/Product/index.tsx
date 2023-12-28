@@ -13,9 +13,10 @@ import { decrement, increment } from '../../features/counter/counterSlice';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { USER_DATA } from '../../hooks/useAuth';
 import { productService } from '../../services/productService';
-import { userService } from '../../services/userSevice';
+import { userService } from '../../services/userService';
 import { IProduct } from '../../types/interface/Product';
-import { reload } from '../../utils/reload';
+import { notifyErro, notifySuccess } from '../../utils/toast';
+import { wait } from '../../utils/wait';
 
 export const Product = () => {
   const { id } = useParams();
@@ -48,6 +49,10 @@ export const Product = () => {
   };
 
   const addToCart = () => {
+    if (quantity === 0) {
+      notifyErro('Quantidade não pode ser zero');
+      return;
+    }
     const cart = [
       {
         ...product,
@@ -55,6 +60,7 @@ export const Product = () => {
       },
     ];
     const cartStorage = JSON.parse(localStorage.getItem('cart') || '[]');
+
     if (cartStorage) {
       cart.push(...cartStorage);
     }
@@ -62,12 +68,11 @@ export const Product = () => {
     setIsLoading(true);
     setTimeout(() => {
       setIsLoading(false);
-      alert('Produto adicionado ao carrinho');
+      notifySuccess('Produto adicionado ao carrinho');
       navigate('/');
-      reload();
     }, 500);
+    wait(3005);
   };
-  // TODO quando estiver com zero perguntar se quer remover o item da sacola
 
   const handleRemoveFavoriteProduct = async () => {
     if (!userData?._id || !product?._id) {
@@ -80,8 +85,8 @@ export const Product = () => {
         productId: product._id,
       });
       if (response) {
-        alert('Produto removido dos favoritos');
-        reload();
+        notifySuccess('Produto removido dos favoritos');
+        wait(3002);
       }
     }
   };
@@ -97,8 +102,8 @@ export const Product = () => {
 
     const response = await addFavoriteProduct(USER_DATA.id, product?._id);
     if (response) {
-      alert('Produto adicionado aos favoritos');
-      reload();
+      notifySuccess('Produto adicionado aos favoritos');
+      wait(3002);
     }
   };
 

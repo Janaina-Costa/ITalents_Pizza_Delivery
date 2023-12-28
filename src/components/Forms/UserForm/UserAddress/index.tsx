@@ -3,9 +3,10 @@ import { Trash } from '@phosphor-icons/react';
 import { ChangeEvent, useContext, useState } from 'react';
 
 import { AuthContext } from '../../../../contexts/AuthContext';
-import { userService } from '../../../../services/userSevice';
+import { userService } from '../../../../services/userService';
 import { IAdressUser } from '../../../../types/interface/User';
-import { reload } from '../../../../utils/reload';
+import { notifySuccess } from '../../../../utils/toast';
+import { wait } from '../../../../utils/wait';
 import { Button } from '../../../Button';
 
 export const UserAddressForm = () => {
@@ -25,7 +26,7 @@ export const UserAddressForm = () => {
 
   const handleChangeSelect = (e: ChangeEvent<HTMLSelectElement> | any) => {
     setAddressIsFilled(e.target.value);
-    localStorage.setItem('addrasync ess', JSON.stringify(dataStorage));
+    localStorage.setItem('address', JSON.stringify(dataStorage));
   };
 
   const handleRemoveAddress = async () => {
@@ -33,11 +34,10 @@ export const UserAddressForm = () => {
       id: userData?._id,
       addressId: resumeAddress?._id,
     });
-    console.log(resp);
 
     if (resp) {
-      alert('Endereço removido com sucesso!');
-      reload();
+      notifySuccess('Endereço removido com sucesso');
+      wait(3002);
     }
   };
 

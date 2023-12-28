@@ -2,7 +2,7 @@ import { ChangeEvent, FormEvent, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { RegisterForm } from '../../components/Forms/RegisterForm';
-import { userService } from '../../services/userSevice';
+import { userService } from '../../services/userService';
 
 export const Register = () => {
   const [inputValue, setInputValue] = useState({

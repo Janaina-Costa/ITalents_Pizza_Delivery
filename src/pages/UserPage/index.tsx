@@ -4,8 +4,9 @@ import { useParams } from 'react-router-dom';
 import { Divider } from '../../components/Divider';
 import { UserForm } from '../../components/Forms/UserForm';
 import { UserAddressForm } from '../../components/Forms/UserForm/UserAddress';
-import { userService } from '../../services/userSevice';
-import { reload } from '../../utils/reload';
+import { userService } from '../../services/userService';
+import { notifySuccess } from '../../utils/toast';
+import { wait } from '../../utils/wait';
 
 export const UserPage = () => {
   const [inputValue, setInputValue] = useState({
@@ -41,8 +42,8 @@ export const UserPage = () => {
     const response = await updateUser(id, inputValue);
     if (response) {
       setInputValue(response);
-      alert('Dados alterados com sucesso!');
-      reload();
+      notifySuccess('Usuário atualizado com sucesso');
+      wait(3002);
     }
   };
 

@@ -1,7 +1,8 @@
 import { useState } from 'react';
-import { Route, Routes } from 'react-router-dom';
-
 import './App.css';
+import { Route, Routes } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+
 import { DropDownMenu } from './components/DropdownModal';
 import Layout from './components/Layout';
 import { Admin } from './pages/Admin';
@@ -31,6 +32,7 @@ function App() {
   };
   return (
     <div className="bg-bg-main-menu bg-no-repeat bg-cover ">
+      <ToastContainer position="top-right" />
       <DropDownMenu
         onClick={handleCloseDropdownMenu}
         className={`${

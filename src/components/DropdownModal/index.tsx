@@ -53,7 +53,7 @@ export const DropDownMenu = ({ className, onClick }: IProps) => {
                             to="https://wa.me//5521999999999?text=Gostaria%20de%20acompanhar%20meu%20pedido"
                             target="_blank"
                           >
-                            Contato
+                            Fale conosco
                           </Link>
                         </li>
                         <li className="cursor-pointer hover:text-primary-red-0 ease-in-out duration-300">
