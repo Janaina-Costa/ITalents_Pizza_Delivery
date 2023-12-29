@@ -9,6 +9,7 @@ import { Table } from '../../components/Table';
 import { TRow } from '../../components/Table/TRow';
 import { productService } from '../../services/productService';
 import { IProduct } from '../../types/interface/Product';
+import { notifySuccess } from '../../utils/toast';
 
 export const Admin = () => {
   const [products, setProducts] = useState<IProduct[]>([]);
@@ -27,6 +28,7 @@ export const Admin = () => {
     const resp = window.confirm('Deseja realmente remover este produto?');
     if (resp) {
       await productService.deleteProduct(id);
+      notifySuccess('Produto removido com sucesso!');
       getProducts();
     }
   };

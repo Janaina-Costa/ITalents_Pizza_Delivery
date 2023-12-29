@@ -69,7 +69,7 @@ export const ProductDetail = ({
             />
           </div>
           <div className="relative w-full  flex items-center justify-center">
-            <Image src={src} alt={alt} className="left-8 w-[28rem]" />
+            <Image src={src} alt={alt} className="left-8 w-[28rem]  " />
           </div>
         </div>
         <HeartStraight
