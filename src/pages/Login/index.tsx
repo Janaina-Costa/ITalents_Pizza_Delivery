@@ -55,7 +55,7 @@ export const Login = () => {
     if (Object.values(validationErros).every((err) => err === '')) {
       const response = await signIn(inputValue.email, inputValue.password);
       if (!response) {
-        notifyErro('Login ou senha inválidos');
+        notifyErro('Usuário ou senha inválidos');
       }
     }
   };
