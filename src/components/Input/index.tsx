@@ -1,6 +1,6 @@
 /* eslint-disable react/require-default-props */
 
-import React, { InputHTMLAttributes, useState } from 'react';
+import React, { InputHTMLAttributes } from 'react';
 
 interface IInput extends InputHTMLAttributes<HTMLInputElement> {
   hasIconLeft?: boolean;
@@ -11,16 +11,7 @@ interface IInput extends InputHTMLAttributes<HTMLInputElement> {
 const Input: React.ForwardRefExoticComponent<
   IInput & React.RefAttributes<HTMLInputElement>
 > = React.forwardRef<HTMLInputElement, IInput>(
-  ({ hasIconLeft = false, className, ...props }, ref) => {
-    const [isFocused, setIsFocused] = useState<boolean>(false);
-
-    const handleInputFocus = () => {
-      setIsFocused(true);
-    };
-    const handleInputBlur = () => {
-      setIsFocused(false);
-    };
-
+  ({ hasIconLeft = false, className, disabled = false, ...props }, ref) => {
     const handleClickIconPassword = () => {
       props.onClickIconPassword?.();
     };
@@ -34,21 +25,21 @@ const Input: React.ForwardRefExoticComponent<
         <input
           type={props.type}
           placeholder={props.placeholder}
-          className={`${className} ${
-            isFocused
-              ? 'border border-solid border-primary-green-2'
-              : 'border border-solid border-gray-500'
-          }
+          className={`${className} outline-none border border-gray-500 focus:outline-none ring-primary-green-1 transition duration-500 focus:ring-1 resize-none
         p-[.5rem] outline-none
         placeholder:text-base
         relative
         `}
-          onFocus={handleInputFocus}
-          onBlur={handleInputBlur}
+          onFocus={props.onFocus}
+          onBlur={props.onBlur}
           onChange={props.onChange}
           onKeyUp={props.onKeyUp}
           value={props.value}
+          name={props.name}
+          checked={props.checked}
           ref={ref}
+          disabled={disabled}
+          required={props.required}
         />
         {props.hasPassword ? (
           <button

@@ -1,13 +1,12 @@
-export interface IPropsItems {
-  id?: string;
-  title: string;
-  description: string;
-  src: string;
-  alt: string;
-  price: number;
-}
+import { ProductCategoryEnum, ProductSizesEnum } from '../enum/Product';
 
-export interface IPropsProduct {
-  idProduct: string;
-  items: IPropsItems;
+export interface IProduct {
+  _id?: string;
+  name: string;
+  description: string;
+  category: ProductCategoryEnum;
+  image: string;
+  size: '' | ProductSizesEnum;
+  price: number;
+  quantity?: number;
 }

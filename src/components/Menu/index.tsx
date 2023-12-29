@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
 /* eslint-disable no-useless-return */
@@ -5,7 +6,9 @@
 /* eslint-disable consistent-return */
 import { useEffect, useState } from 'react';
 
-import { itemsData } from '../../data/itemsData';
+import { productService } from '../../services/productService';
+import { ProductCategoryEnum } from '../../types/enum/Product';
+import { IProduct } from '../../types/interface/Product';
 import { Button } from '../Button';
 
 import { ItemMenuCard } from './ItemMenuCard';
@@ -19,27 +22,46 @@ interface IPropsBtnMenu {
 
 const dataBtn = [
   {
-    id: 'item-pizza-trad',
+    id: ProductCategoryEnum.TRADICIONAL,
     name: 'Pizzas Tradicionais',
     value: 'traditional',
     isSelectedButton: true,
   },
   {
-    id: 'item-pizza-sweet',
+    id: ProductCategoryEnum.SWEET,
     name: 'Pizzas Doces',
     value: 'sweet',
     isSelectedButton: false,
   },
-  { id: 'btn3', name: 'Bebidas', value: 'drinks', isSelectedButton: false },
+  {
+    id: ProductCategoryEnum.DRINK,
+    name: 'Bebidas',
+    value: 'drinks',
+    isSelectedButton: false,
+  },
 ];
 
 export const Menu = () => {
   const [listButtonsMenu, setListButtonsMenu] =
     useState<IPropsBtnMenu[]>(dataBtn);
-  const [listProductItems, setListProductItems] = useState(itemsData);
-  const [idSelected, setIdSelected] = useState('item-pizza-trad');
+  const [listProductItems, setListProductItems] = useState<IProduct[]>([]);
+  const [idSelected, setIdSelected] = useState(ProductCategoryEnum.TRADICIONAL);
+  const { getAllProducts } = productService;
 
-  const handleButtonClick = (id: string) => {
+  const getProduct = async () => {
+    const data = await getAllProducts();
+    if (!data) {
+      return;
+    }
+
+    setListProductItems(data);
+  };
+
+  useEffect(() => {
+    getProduct();
+  }, []);
+
+  const handleButtonClick = (id: any) => {
     setListButtonsMenu((prev) => {
       return prev.map((item) =>
         item.id === id
@@ -75,12 +97,10 @@ export const Menu = () => {
 
   return (
     <section className="w-full">
-      <section className="mt-8 mb-8 flex flex-col flex-wrap">
-        <h1 className="text-5xl font-semibold mb-8 px-10 max-md:text-3xl">
-          Menu
-        </h1>
+      <section className="mt-8 mb-8 flex flex-col flex-wrap pl-4">
+        <h1 className="text-5xl font-semibold mb-8  max-md:text-3xl">Menu</h1>
 
-        <div className="flex justify-start gap-4 px-8 w-full overflow-hidden max-sm:flex-col">
+        <div className="flex justify-start gap-4 w-full overflow-hidden max-sm:flex-col ">
           {listButtonsMenu.map((btn) => (
             <Button
               key={btn.value}
@@ -98,21 +118,26 @@ export const Menu = () => {
       </section>
 
       <section
-        className="grid grid-cols-4 w-full justify-items-center max-sm:grid-cols-1
+        className="grid grid-cols-4 w-full  max-sm:grid-cols-1 pl-4
       max-md:grid-cols-2
       max-lg:grid-cols-3
+      max-sm:justify-items-center
      "
       >
         {listProductItems.map((item) =>
-          idSelected === item.idProduct ? (
+          idSelected === item.category ? (
             <ItemMenuCard
-              key={item.idProduct}
+              key={item._id}
               idProduct={idSelected}
-              data={item.items.map((dataItems) => {
-                const data = { ...dataItems };
-                return data;
-              })}
-              value={0}
+              data={{
+                id: item._id,
+                name: item.name,
+                price: item.price,
+                src: item.image,
+                alt: item.name,
+                description: item.description,
+                size: item.size !== 'nenhum' ? item.size.toUpperCase() : '',
+              }}
             />
           ) : (
             ''

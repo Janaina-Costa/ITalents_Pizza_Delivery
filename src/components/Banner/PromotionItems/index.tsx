@@ -1,4 +1,4 @@
-import { IPropsItems } from '../../../types/interface/Product';
+import { IPropsItems } from '../../../types/interface/ProductPromotions';
 import { Button } from '../../Button';
 import { Image } from '../../Image';
 
@@ -17,7 +17,7 @@ export const PromoItem = ({ description, src, title, alt }: IPropsItems) => (
       </div>
       <div>
         <Button isSelected className="max-sm:text-xs max-sm:p-3" type="button">
-          Confira a promoção
+          Confira em nosso menu
         </Button>
       </div>
     </section>

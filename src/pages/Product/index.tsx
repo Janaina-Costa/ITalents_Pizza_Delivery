@@ -1,123 +1,176 @@
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable no-useless-return */
 /* eslint-disable consistent-return */
 
-import { ArrowCircleLeft, HeartStraight } from '@phosphor-icons/react';
-import { ChangeEvent, useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
-import { Button } from '../../components/Button';
 import { CountButton } from '../../components/CountButton';
-import { Divider } from '../../components/Divider';
-import { itemsData } from '../../data/itemsData';
-import { Image } from '../../components/Image';
+import { ProductDetail } from '../../components/Product';
+import { LoadingSpinner } from '../../components/Spinner';
+import { AuthContext } from '../../contexts/AuthContext';
+import { decrement, increment } from '../../features/counter/counterSlice';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { USER_DATA } from '../../hooks/useAuth';
+import { productService } from '../../services/productService';
+import { userService } from '../../services/userService';
+import { IProduct } from '../../types/interface/Product';
+import { notifyErro, notifySuccess } from '../../utils/toast';
+import { wait } from '../../utils/wait';
 
 export const Product = () => {
   const { id } = useParams();
-  const [isFavorite, setIsFavorite] = useState<boolean>(false);
-  const [count, setCount] = useState<number>(1);
+
+  const quantity = useAppSelector((state) => state.counter.value);
+  const dispatch = useAppDispatch();
+  const { getProductById } = productService;
+  const { addFavoriteProduct, removeFavoriteProduct } = userService;
+  const { userData } = useContext(AuthContext);
   const [total, setTotal] = useState<number>();
+  const [product, setProduct] = useState<IProduct>();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isFavorite, setIsFavorite] = useState<boolean>(false);
 
   const navigate = useNavigate();
 
-  const setData = (idProduct: string) => {
-    const getData = itemsData.map((item) =>
-      item.items.find((c) => c.id === idProduct),
-    );
-    const data = getData.map((f) => f);
-
-    if (data === undefined) {
-      return;
-    }
-
-    return data[0] || data[1];
-  };
-
-  const handleFavoriteProduct = () => {
-    setIsFavorite((prev) => !prev);
+  const redirectTo = () => {
+    navigate('/');
   };
 
   const handleCountSum = () => {
-    setCount((prev) => prev + 1);
+    dispatch(increment());
   };
 
   const handleCountSub = () => {
-    if (count <= 0) {
+    if (quantity <= 0) {
       return;
     }
-    setCount((prev) => prev - 1);
+    dispatch(decrement());
   };
 
-  const handleChangeInputCount = (e: ChangeEvent<HTMLInputElement>) => {
-    setCount(Number(e.target.value));
+  const addToCart = () => {
+    if (quantity === 0) {
+      notifyErro('Quantidade não pode ser zero');
+      return;
+    }
+    const cart = [
+      {
+        ...product,
+        quantity,
+      },
+    ];
+    const cartStorage = JSON.parse(localStorage.getItem('cart') || '[]');
+
+    if (cartStorage) {
+      cart.push(...cartStorage);
+    }
+    localStorage.setItem('cart', JSON.stringify(cart));
+    setIsLoading(true);
+    setTimeout(() => {
+      setIsLoading(false);
+      notifySuccess('Produto adicionado ao carrinho');
+      navigate('/');
+    }, 500);
+    wait(3005);
   };
-  // TODO quando estiver com zero perguntar se quer remover o item da sacola
+
+  const handleRemoveFavoriteProduct = async () => {
+    if (!userData?._id || !product?._id) {
+      return;
+    }
+
+    if (isFavorite) {
+      const response = await removeFavoriteProduct({
+        id: USER_DATA.id,
+        productId: product._id,
+      });
+      if (response) {
+        notifySuccess('Produto removido dos favoritos');
+        wait(3002);
+      }
+    }
+  };
+
+  const handleAddFavoriteProduct = async () => {
+    if (!userData?._id || !product?._id) {
+      return;
+    }
+
+    if (isFavorite) {
+      return;
+    }
+
+    const response = await addFavoriteProduct(USER_DATA.id, product?._id);
+    if (response) {
+      notifySuccess('Produto adicionado aos favoritos');
+      wait(3002);
+    }
+  };
 
   useEffect(() => {
     if (!id) {
       return;
     }
-    const price: number = Number(setData(id!)?.price.toFixed(2));
-    setTotal(count * price);
-  }, [count, id]);
+    const setData = async () => {
+      const response = await getProductById(id);
+      if (!response) {
+        return;
+      }
+      setProduct(response);
+    };
+    setData();
+  }, [id, getProductById]);
+
+  useEffect(() => {
+    if (!product) {
+      return;
+    }
+    const totalValue = product.price * quantity;
+    setTotal(totalValue);
+  }, [quantity, product]);
+
+  useEffect(() => {
+    if (!userData?._id || !product?._id) {
+      return;
+    }
+  }, [product, userData]);
+
+  useEffect(() => {
+    if (!userData?._id || !product?._id) {
+      return;
+    }
+    const isFavoriteProduct = userData?.favorite_product.filter(
+      (item) => item._id === product?._id,
+    );
+
+    if (isFavoriteProduct[0]) {
+      return setIsFavorite(true);
+    }
+    setIsFavorite(false);
+  }, [product, userData, id]);
 
   return (
-    <div className="bg-black max-w-[40rem] m-auto mt-16 p-8 flex flex-col items-center max-md:mt-0 max-md:h-screen overflow-hidden">
-      <div className="w-full relative p-2">
-        <div className=" flex flex-col items-center p-2 bg-back-banner bg-cove w-full h-96 rounded-md ">
-          <div className="w-full  flex justify-between">
-            <ArrowCircleLeft
-              size={40}
-              color="#57EB00"
-              weight="thin"
-              onClick={() => navigate('/')}
-              className="cursor-pointer hover:brightness-100"
-            />
-          </div>
-          <Image
-            src={setData(id!)?.src}
-            alt={setData(id!)?.alt}
-            className="absolute left-0"
-          />
-        </div>
-        <HeartStraight
-          className="mt-3 cursor-pointer"
-          size={32}
-          color={isFavorite ? '#FF0000' : '#ffffff'}
-          weight="fill"
-          onClick={handleFavoriteProduct}
-        />
-      </div>
-
-      <div className="flex flex-col mt-[3.4rem] w-full p-2 mb-8 ">
-        <h1 className="text-3xl font-semibold">{setData(id!)?.title} </h1>
-
-        <Divider className="mt-6 mb-6 " />
-        <p>{setData(id!)?.description} </p>
-      </div>
-
-      <div className="flex flex-col w-full p-2 ">
-        <p>Quantidade</p>
-
-        <div className="flex w-full justify-between items-center mt-4">
-          <CountButton
-            counter={count}
-            onClickMinus={handleCountSub}
-            onClickPlus={handleCountSum}
-            onChangeInput={handleChangeInputCount}
-          />
-
-          <div className="flex text-[40px] max-sm:text-[32px] text-primary-green-0">
-            <span>R$</span>
-            <p>{total}</p>
-          </div>
-        </div>
-      </div>
-      <Button
-        className="rounded-md w-full mt-[3.25rem]"
-        isSelected
-        type="button"
+    <div className="bg-black max-w-[40rem] m-auto mt-16 p-8 flex flex-col items-center max-md:mt-0 max-md:h-screen overflow-hidden mt-28">
+      <ProductDetail
+        id={product?._id}
+        alt={product?.name}
+        src={product?.image}
+        description={product?.description}
+        title={product?.name}
+        total={total}
+        onClickToNavigate={redirectTo}
+        onAddToCart={addToCart}
+        onAddFavoriteProduct={handleAddFavoriteProduct}
+        onDelFavoriteProduct={handleRemoveFavoriteProduct}
+        className={`${isFavorite ? 'text-primary-red-1' : 'text-white'}`}
       >
-        Adicionar à Sacola
-      </Button>
+        <CountButton
+          counter={quantity}
+          onClickMinus={handleCountSub}
+          onClickPlus={handleCountSum}
+        />
+        {isLoading && <LoadingSpinner />}
+      </ProductDetail>
     </div>
   );
 };

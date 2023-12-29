@@ -19,14 +19,28 @@
     * Rotas Privadas
     * Integração com Api - está consumindo a api do projeto backend - Aplicação de pizzaria (https://github.com/Janaina-Costa/iTalents-sistema-de-pizzaria)
 
+ ### Requisitos para 2ª entrega:
+    * Mínimo 5 páginas
+    * Autenticação e rota segura
+    * CRUD completo
+    * Torca de dados entre rotas e props
+    * Troca de estados globais com useContext
+    * Estilização de todos as paginas com tailwind
+    * Integração com serviço externo via axios consumindo endpoints [GET/POST/PUT/DELETE]
 
 
-
-## Tecnologia
+## Tecnologia/Libs
 - Vite
 - React
 - TypeScript
 - React-router-dom
 - Tailwind css
 - Swiper (Slide dos produtos)
+- React-toastify
+
+## Rodando o projeto
+-  suba a api do projeto - yarn dev (irá rodar na porta 3006 )
+- rodar o projeto - yarn dev
+
+
 
